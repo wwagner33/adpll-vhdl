@@ -1,0 +1,33 @@
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
+
+entity div4 is
+	port(input  : in std_logic;
+        
+	    div_out: buffer std_logic
+	    );
+end div4; 
+
+-- instatantiate 2 toggle flip flop 
+
+architecture div_4_arch of div4 is 
+	component toggle is 
+		port(input  : in std_logic;
+	    q : buffer std_logic
+	    );
+	end component;
+	signal q_2, q_4 : std_logic;
+begin 
+	toggle1:toggle port map (
+		input => input,
+        q => q_2
+       );
+    toggle2:toggle port map (
+        input => q_2,
+        q => div_out
+        );
+end div4_arch;      
+     

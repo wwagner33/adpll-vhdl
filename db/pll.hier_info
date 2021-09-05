@@ -1,0 +1,121 @@
+|pll
+clock_50mhz => divfreq:b2v_inst.clk
+kclock => k_counter:b2v_inst2.kclock
+dco_clock => dco:b2v_inst3.clock
+fout << dco:b2v_inst3.fout
+fref << divfreq:b2v_inst.freq_out
+
+
+|pll|divfreq:b2v_inst
+clk => ot.CLK
+clk => count[0].CLK
+clk => count[1].CLK
+clk => count[2].CLK
+clk => count[3].CLK
+clk => count[4].CLK
+clk => count[5].CLK
+clk => count[6].CLK
+clk => count[7].CLK
+clk => count[8].CLK
+clk => count[9].CLK
+clk => count[10].CLK
+clk => count[11].CLK
+clk => count[12].CLK
+clk => count[13].CLK
+clk => count[14].CLK
+clk => count[15].CLK
+clk => count[16].CLK
+clk => count[17].CLK
+clk => count[18].CLK
+clk => count[19].CLK
+clk => count[20].CLK
+clk => count[21].CLK
+clk => count[22].CLK
+clk => count[23].CLK
+clk => count[24].CLK
+freq_out <= ot.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|pll|pfd:b2v_inst1
+a => d_ff:d_ff_1_map_ports.clk
+b => d_ff:d_ff_2_map_ports.clk
+up <= d_ff:d_ff_1_map_ports.q
+down <= d_ff:d_ff_2_map_ports.q
+
+
+|pll|pfd:b2v_inst1|d_ff:d_ff_1_map_ports
+clk => nq~reg0.CLK
+clk => q~reg0.CLK
+d => q~reg0.DATAIN
+d => nq~reg0.DATAIN
+rst => nq~reg0.PRESET
+rst => q~reg0.ACLR
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+nq <= nq~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|pll|pfd:b2v_inst1|d_ff:d_ff_2_map_ports
+clk => nq~reg0.CLK
+clk => q~reg0.CLK
+d => q~reg0.DATAIN
+d => nq~reg0.DATAIN
+rst => nq~reg0.PRESET
+rst => q~reg0.ACLR
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+nq <= nq~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|pll|k_counter:b2v_inst2
+up => count_up.IN0
+up => count_down.IN0
+down => count_down.IN1
+down => count_up.IN1
+kclock => ~NO_FANOUT~
+carry <= kcountup[3].DB_MAX_OUTPUT_PORT_TYPE
+barrow <= kcountdown[3].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|pll|dco:b2v_inst3
+carr => car_edge:c_edge.carr
+borr => bor_edge:b_edge.borr
+clock => car_edge:c_edge.clock
+clock => bor_edge:b_edge.clock
+clock => dff_cont:dff_con.clock
+dlipout <= dff_cont:dff_con.toggleff
+fout <= div4:divider4.div4_out
+flag_test <= dff_cont:dff_con.flag
+
+
+|pll|dco:b2v_inst3|car_edge:c_edge
+carr => state_edge.IN0
+carr => Selector1.IN2
+carr => Selector0.IN2
+toggle_ff => state_edge.IN1
+clock => present_state~1.DATAIN
+flagc <= flagc.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|pll|dco:b2v_inst3|bor_edge:b_edge
+borr => state_edge.IN0
+borr => Selector1.IN3
+borr => Selector0.IN2
+toggle_ff => state_edge.IN1
+clock => present_state~1.DATAIN
+flagb <= flagb.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|pll|dco:b2v_inst3|dff_cont:dff_con
+flag_carr => dff_control.IN0
+Flag_borr => dff_control.IN1
+clock => toggleff~reg0.CLK
+clock => idout.IN1
+toggleff <= toggleff~reg0.DB_MAX_OUTPUT_PORT_TYPE
+idout <= idout.DB_MAX_OUTPUT_PORT_TYPE
+flag <= dff_control.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|pll|dco:b2v_inst3|div4:divider4
+input => ~NO_FANOUT~
+div4_out <= div4.DB_MAX_OUTPUT_PORT_TYPE
+
+
