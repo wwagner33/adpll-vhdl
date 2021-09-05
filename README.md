@@ -6,7 +6,7 @@ Wellington W. F. Sarmento - Doctoral student of the Postgraduate Program in Elec
 
 Paulo de Tarso C. Pequeno - Master in Teleinformatics Engineering from the Federal University of Ceará (UFC). Student-observer for a PhD in Electrical Engineering at UFC)
 
-Rodrigo Ciarlini - Master's student of the Post-Graduate Program in Electrical Engineering (PPGEE) of the Federal University of Ceará (UFC)
+Rodrigo C. Ciarlini - Master's student of the Post-Graduate Program in Electrical Engineering (PPGEE) of the Federal University of Ceará (UFC)
 
 ## Work
 Work produced in the course of Advanced Microprocessor Techniques (DSP and FPGA) of the UFC PPGEE, under the supervision of PhD professor Paulo Peixoto Praça.
