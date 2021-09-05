@@ -1,0 +1,17 @@
+transcript on
+if {[file exists rtl_work]} {
+	vdel -lib rtl_work -all
+}
+vlib rtl_work
+vmap work rtl_work
+
+vcom -93 -work work {C:/Users/Paulo/OneDrive/Documentos/Projeto_Doutorado/trabalho-ppl_V3/dff_cont.vhd}
+vcom -93 -work work {C:/Users/Paulo/OneDrive/Documentos/Projeto_Doutorado/trabalho-ppl_V3/car_edge.vhd}
+vcom -93 -work work {C:/Users/Paulo/OneDrive/Documentos/Projeto_Doutorado/trabalho-ppl_V3/bor_edge.vhd}
+vcom -93 -work work {C:/Users/Paulo/OneDrive/Documentos/Projeto_Doutorado/trabalho-ppl_V3/pfd.vhd}
+vcom -93 -work work {C:/Users/Paulo/OneDrive/Documentos/Projeto_Doutorado/trabalho-ppl_V3/d_ff.vhd}
+vcom -93 -work work {C:/Users/Paulo/OneDrive/Documentos/Projeto_Doutorado/trabalho-ppl_V3/divfreq.vhd}
+vcom -93 -work work {C:/Users/Paulo/OneDrive/Documentos/Projeto_Doutorado/trabalho-ppl_V3/k_counter.vhd}
+vcom -93 -work work {C:/Users/Paulo/OneDrive/Documentos/Projeto_Doutorado/trabalho-ppl_V3/dco.vhd}
+vcom -93 -work work {C:/Users/Paulo/OneDrive/Documentos/Projeto_Doutorado/trabalho-ppl_V3/div8.vhd}
+

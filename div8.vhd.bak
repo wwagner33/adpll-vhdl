@@ -1,0 +1,46 @@
+-- file: div8.vhd
+------------------------------------------ 
+--  divides the input frequency by 8 
+-- 
+-- By Ahmed Allam
+-- October 9, 1999
+-- University of Alberta, EE552.
+
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
+
+entity div8 is
+	port(input  : in std_logic;
+        
+	    fout: buffer std_logic
+	    );
+end div8; 
+
+-- instatantiate 3 toggle jk 
+-- flip flops
+architecture archdev8 of div8 is 
+	component toggle is 
+		port(input  : in std_logic;
+	    q : buffer std_logic
+	    );
+	end component;
+	signal q_2, q_4,q_8 : std_logic;
+begin 
+	toggle1:toggle port map (
+		input => input,
+        q => q_2
+       );
+    toggle2:toggle port map (
+        input => q_2,
+      --  q => fout
+        q => q_4
+        );
+    toggle3:toggle port map (
+         input => q_4,
+         q => fout
+        );
+end archdev8;      
+     

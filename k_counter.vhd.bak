@@ -1,0 +1,63 @@
+-- ****************************************************
+-- Program: k-counter.vhd
+-- Description: K-Counter filter is a loop filter to ADPLL proposed by Gayathri MG
+--		Paper: Design of All Digital Phase Locked Loop in VHDL,20136 (ijera.com)
+-- Input: up,down, kclock
+-- Output: carry,barrow.
+-- Author: Wellington W. F. Sarmento, Paulo de T. C. Pequeno e Rodrigo Ciarlini
+-- Date: 24/06/2021
+-- State: not tested
+-- ****************************************************
+
+library ieee;
+use ieee.std_logic_1164.all; 
+
+
+entity k_counter is 
+	port (
+		up :  in  std_logic;
+		down :  in  std_logic;
+		kclock :  in  std_logic;
+		carry:	:  out  std_logic;
+		barrow :  out  std_logic);
+END k_counter;
+
+architecture k_counter_arch of k_counter is 
+begin
+	constant k: natural:=16;
+	signal sup,sdown: std_logic;
+	signal kcountup,kcountdown : natural range 0 to (k-1);
+	signal otup,otdown: std_logic:=0;
+	
+	carry<=otup;
+	barrow<=otdown;
+	
+	count_up: process(kclock,sup)
+	begin
+		if (klock'event and kclock='1') then
+			
+			if (sdown='0' and sup='1') then
+				kcountup<=kcountup+1;
+				if (kcountup>=(k/2)) then
+					kcountup<=0;
+					otup<=not otup;
+				end if;
+			end if;
+		end if;
+	end process count_up;
+
+	count_down: process(kclock,sdown)
+	begin
+		if (klock'event and kclock='1') then
+			if (sdown='1' and sup='0') then
+				kcountdown<=kcountdown+1;
+				if (kcountdown>=(k/2)) then
+					kcountdown<=0;
+					otdown<=not otdown;
+				end if;
+			end if;
+		end if;
+	end process count_down;
+
+
+end k_counter-arch;

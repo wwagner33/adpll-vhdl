@@ -1,0 +1,13 @@
+
+State Machine - |pll|dco:b2v_inst3|bor_edge:b_edge|present_state
+Name present_state.final2 present_state.final present_state.decision present_state.idle 
+present_state.idle 0 0 0 0 
+present_state.decision 0 0 1 1 
+present_state.final 0 1 0 1 
+present_state.final2 1 0 0 1 
+
+State Machine - |pll|dco:b2v_inst3|car_edge:c_edge|present_state
+Name present_state.final2 present_state.final present_state.idle 
+present_state.idle 0 0 0 
+present_state.final 0 1 1 
+present_state.final2 1 0 1 
