@@ -1,13 +1,13 @@
-Fitter Status : Successful - Mon Jul 05 19:50:11 2021
+Fitter Status : Successful - Sun Sep 05 20:43:59 2021
 Quartus Prime Version : 15.1.0 Build 185 10/21/2015 SJ Lite Edition
 Revision Name : trabalho-pll_V3
-Top-level Entity Name : trabalho-pll_V3
+Top-level Entity Name : adpll
 Family : Cyclone V
 Device : 5CSEMA5F31C6
 Timing Models : Final
 Logic utilization (in ALMs) : 1 / 32,070 ( < 1 % )
 Total registers : 0
-Total pins : 4 / 457 ( < 1 % )
+Total pins : 6 / 457 ( 1 % )
 Total virtual pins : 0
 Total block memory bits : 0 / 4,065,280 ( 0 % )
 Total RAM Blocks : 0 / 397 ( 0 % )

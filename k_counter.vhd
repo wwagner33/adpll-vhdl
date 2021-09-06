@@ -16,11 +16,11 @@ use ieee.numeric_std.all;
 
 entity k_counter is 
 	port (
-		up:  		in  std_logic;
-		down:  	in  std_logic;
+		in_up:  		in  std_logic;
+		in_down:  	in  std_logic;
 		kclock:  in  std_logic;
 		carry:  	out  std_logic;
-		barrow:  out  std_logic);
+		borrow:  out  std_logic);
 end k_counter;
 
 architecture k_counter_arch of k_counter is 
@@ -31,9 +31,9 @@ architecture k_counter_arch of k_counter is
 	
 begin
 	carry<=otup;
-	barrow<=otdown;
-	sup<=up;
-	sdown<=down;
+	borrow<=otdown;
+	sup<=in_up;
+	sdown<=in_down;
 	
 	count_up: process(kclock)
 		variable msb: std_logic_vector(3 downto 0);
