@@ -21,8 +21,12 @@ Work produced in the course of Advanced Microprocessor Techniques (DSP and FPGA)
 
 
 ## Tools
-Altera Quartus Prime Lite Edition Version 15.1.0 (Copyright (C) 1991-2015 Altera Corporation)
-Model*Sim* Altera Starter Edition 10.4b (opyright (C) 1991-2015 Mentor Graphics Corporation)
+- Altera Quartus Prime Lite Edition Version 15.1.0 (Copyright (C) 1991-2015 Altera Corporation)
+- Model*Sim* Altera Starter Edition 10.4b (opyright (C) 1991-2015 Mentor Graphics Corporation)
+
+## Operating System used for tests
+
+Microsoft Windows 11
 
 ## Lisence
 [GNU Public Lisence version v3.0](LISENCE).
