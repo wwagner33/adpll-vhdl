@@ -17,7 +17,7 @@
 // PROGRAM "Quartus Prime"
 // VERSION "Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition"
 
-// DATE "07/05/2021 19:21:04"
+// DATE "09/05/2021 18:57:30"
 
 // 
 // Device: Altera 5CSEMA5F31C6 Package FBGA896
@@ -32,16 +32,16 @@
 module pfd (
 	a,
 	b,
-	up,
-	down);
+	out_up,
+	out_down);
 input 	a;
 input 	b;
-output 	up;
-output 	down;
+output 	out_up;
+output 	out_down;
 
 // Design Ports Information
-// up	=>  Location: PIN_AF18,	 I/O Standard: 2.5 V,	 Current Strength: Default
-// down	=>  Location: PIN_AE17,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// out_up	=>  Location: PIN_AF18,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// out_down	=>  Location: PIN_AE17,	 I/O Standard: 2.5 V,	 Current Strength: Default
 // a	=>  Location: PIN_AG17,	 I/O Standard: 2.5 V,	 Current Strength: Default
 // b	=>  Location: PIN_AG16,	 I/O Standard: 2.5 V,	 Current Strength: Default
 
@@ -69,35 +69,35 @@ wire \d_ff_2_map_ports|q~DUPLICATE_q ;
 
 
 // Location: IOOBUF_X50_Y0_N59
-cyclonev_io_obuf \up~output (
+cyclonev_io_obuf \out_up~output (
 	.i(\d_ff_1_map_ports|q~q ),
 	.oe(vcc),
 	.dynamicterminationcontrol(gnd),
 	.seriesterminationcontrol(16'b0000000000000000),
 	.parallelterminationcontrol(16'b0000000000000000),
 	.devoe(devoe),
-	.o(up),
+	.o(out_up),
 	.obar());
 // synopsys translate_off
-defparam \up~output .bus_hold = "false";
-defparam \up~output .open_drain_output = "false";
-defparam \up~output .shift_series_termination_control = "false";
+defparam \out_up~output .bus_hold = "false";
+defparam \out_up~output .open_drain_output = "false";
+defparam \out_up~output .shift_series_termination_control = "false";
 // synopsys translate_on
 
 // Location: IOOBUF_X50_Y0_N42
-cyclonev_io_obuf \down~output (
+cyclonev_io_obuf \out_down~output (
 	.i(\d_ff_2_map_ports|q~DUPLICATE_q ),
 	.oe(vcc),
 	.dynamicterminationcontrol(gnd),
 	.seriesterminationcontrol(16'b0000000000000000),
 	.parallelterminationcontrol(16'b0000000000000000),
 	.devoe(devoe),
-	.o(down),
+	.o(out_down),
 	.obar());
 // synopsys translate_off
-defparam \down~output .bus_hold = "false";
-defparam \down~output .open_drain_output = "false";
-defparam \down~output .shift_series_termination_control = "false";
+defparam \out_down~output .bus_hold = "false";
+defparam \out_down~output .open_drain_output = "false";
+defparam \out_down~output .shift_series_termination_control = "false";
 // synopsys translate_on
 
 // Location: IOIBUF_X50_Y0_N92

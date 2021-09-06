@@ -1,5 +1,5 @@
 Assembler report for trabalho-pll_V3
-Mon Jul 05 19:50:39 2021
+Sun Sep 05 20:44:23 2021
 Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
 
 
@@ -38,9 +38,9 @@ agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Mon Jul 05 19:50:39 2021 ;
+; Assembler Status      ; Successful - Sun Sep 05 20:44:23 2021 ;
 ; Revision Name         ; trabalho-pll_V3                       ;
-; Top-level Entity Name ; trabalho-pll_V3                       ;
+; Top-level Entity Name ; adpll                                 ;
 ; Family                ; Cyclone V                             ;
 ; Device                ; 5CSEMA5F31C6                          ;
 +-----------------------+---------------------------------------+
@@ -68,8 +68,8 @@ agreement for further details.
 ; Option         ; Setting                                                                                            ;
 +----------------+----------------------------------------------------------------------------------------------------+
 ; Device         ; 5CSEMA5F31C6                                                                                       ;
-; JTAG usercode  ; 0x00AF4ECF                                                                                         ;
-; Checksum       ; 0x00AF4ECF                                                                                         ;
+; JTAG usercode  ; 0x00AF4D36                                                                                         ;
+; Checksum       ; 0x00AF4D36                                                                                         ;
 +----------------+----------------------------------------------------------------------------------------------------+
 
 
@@ -79,13 +79,13 @@ agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus Prime Assembler
     Info: Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
-    Info: Processing started: Mon Jul 05 19:50:21 2021
+    Info: Processing started: Sun Sep 05 20:44:07 2021
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off trabalho-pll_V3 -c trabalho-pll_V3
 Info (115030): Assembler is generating device programming files
 Info: Quartus Prime Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 5000 megabytes
-    Info: Processing ended: Mon Jul 05 19:50:39 2021
-    Info: Elapsed time: 00:00:18
-    Info: Total CPU time (on all processors): 00:00:18
+    Info: Peak virtual memory: 5001 megabytes
+    Info: Processing ended: Sun Sep 05 20:44:23 2021
+    Info: Elapsed time: 00:00:16
+    Info: Total CPU time (on all processors): 00:00:16
 
 

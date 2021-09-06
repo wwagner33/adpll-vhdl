@@ -15,34 +15,33 @@ use ieee.std_logic_1164.all;
 
 entity dco is
               port (
-                   carr, borr, clock :in std_logic; 
-                 -- add a port for test of the dff out 
+                   carry, borrow, clock 	:in std_logic;
+                   dco_out 				: out std_logic
 
-                    dlipout : out std_logic;
-                 -- 
-
-                   fout,flag_test : buffer std_logic        
+                   -- fout 			: buffer std_logic --flag_test       
               ); 
 end dco; 
 
 
-architecture dco_arch of dco is  
+architecture dco_arch of dco is 
+ 
 -- detects the edge of the carry signal 
 	component  car_edge is
               port (
     	          carr,toggle_ff,clock: in std_logic; 
-   	    	      flagc : out std_logic                           
+   	    	    flagc : out std_logic                           
               ); 
 	end component; 
+	
 -- detects the edge of the borrow signal 
 	component bor_edge is
               port (
     	          borr,toggle_ff,clock: in std_logic; 
-        	      flagb : out std_logic                           
+					 flagb : out std_logic                           
               ); 
 	end component; 
 	
--- output counter (with D-Flip Flop) 
+-- output counter (with D Flip-Flop) 
 	component dff_cont is
               port (
               flag_carr,flag_borr,clock: in std_logic; 
@@ -68,44 +67,44 @@ architecture dco_arch of dco is
 					);
 	end component;
 	
-	signal stff,scarr,sborr,sidout: std_logic;
+	signal stff,scarr,sborr,sidout,sfout: std_logic;
 begin 
-	c_edge:	car_edge 
+	car_edge_inst:	car_edge 
 			port map (
 				clock => clock,
-            carr => carr,
+            carr => carry,
 				toggle_ff =>stff,
 			   flagc  => scarr
          );
 			
-	b_edge: bor_edge     
+	bor_edge_inst: bor_edge     
 			port map (
                  clock => clock,
-    	          borr => borr,
+    	           borr => borrow,
                  toggle_ff =>stff,
                  flagb =>sborr
           );
-   dff_con: dff_cont                          
+   dff_cont_inst: dff_cont                          
             port map (
                  clock => clock,
                  flag_carr => scarr,
 					  flag_borr => sborr,
-                 ToggleFF =>stff,
-              	  idout => sidout,
-              	  flag  => flag_test              -- added for test 
+                 toggleff =>stff,
+              	  idout => sidout
+              	  --flag  => flag_test              -- added for test 
               );
 --	divider4: div4
 --				port map(
 --					input=>sidout,
 --					div4_out=>fout
 --				);
-	divider8: div8
+	div8_inst: div8
 				port map(
 					input=>sidout,
-					div8_out=>fout
+					div8_out=>sfout
 				);
 -- this port is added for test 
-   dlipout <=stff;
+   dco_out <=sfout;-- stff;
  
 
 end  dco_arch;

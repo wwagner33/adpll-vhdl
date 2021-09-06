@@ -5,13 +5,14 @@
 -- Output: freq_1Hz
 -- Author: Wellington, Paulo e Rodrigo
 -- Date: 16/06/2021
--- State: No erros known
+-- State: No errors known
 -- ****************************************************
 -- Counter is 25000000 to 1 Hz (1 sample)
 -- Counter is 416667 to +/- 60Hz (to 135 samples) = 3087
 -- Counter is 208373 to +/- 120 Hz
 -- counter is 25000 to 1 kHz
 -- Counter is 1000 to 25KHz
+-- Counter is 125	to 200KHz
 -- Counter is 50  to 500KHz
 -- Counter is 25  to 1MHz
 -- Remove Counter to 25 MHz
@@ -29,7 +30,7 @@ end divfreq;
 
 architecture divfreq_arch of divfreq is
 
-signal count: 	natural range 0 to 25000000:=0;
+signal count: 	natural range 0 to 416667:=0;
 signal ot: 		std_logic:='0';
 
 begin
@@ -38,11 +39,11 @@ begin
 	divfreq_logic: process(clk)
 	begin
 		if (clk'event and clk='1') then
-			-- count<=count+1;
-			--if (count=1) then
-			--		count<=0;
-					ot<=not ot;
-			-- end if;
+			count<=count+1;
+			if (count=125) then
+				count<=0;
+				ot<=not ot;
+			end if;
 		end if;
 	end process;	
 	

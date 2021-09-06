@@ -19,10 +19,10 @@ use ieee.std_logic_1164.all;
 
 entity pfd is 
 	port (
-		a :  in  std_logic; -- 
-		b :  in  std_logic;
-		up :  out  std_logic;
-		down :  out  std_logic);
+		a :  			in  std_logic; -- 
+		b :  			in  std_logic;
+		out_up : 	out  std_logic;
+		out_down :  out  std_logic);
 END pfd;
 
 architecture pfd_arch of pfd is 
@@ -40,8 +40,8 @@ architecture pfd_arch of pfd is
 
 
 begin 
-	up<=sup;
-	down<=sdown;
+	out_up<=sup;
+	out_down<=sdown;
 	sd<=set_signal;
 
 -- use component d_ff and a AND port to create the Phase and Frequency Detector

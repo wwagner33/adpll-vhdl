@@ -1,5 +1,5 @@
 Analysis & Synthesis report for trabalho-pll_V3
-Mon Jul 05 19:48:53 2021
+Sun Sep 05 20:42:55 2021
 Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
 
 
@@ -13,14 +13,17 @@ Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. Registers Removed During Synthesis
-  9. Removed Registers Triggering Further Register Optimizations
- 10. General Register Statistics
- 11. Port Connectivity Checks: "pfd:inst1|d_ff:d_ff_2_map_ports"
- 12. Port Connectivity Checks: "pfd:inst1|d_ff:d_ff_1_map_ports"
- 13. Post-Synthesis Netlist Statistics for Top Partition
- 14. Elapsed Time Per Partition
- 15. Analysis & Synthesis Messages
+  8. State Machine - |adpll|dco:dco_inst|bor_edge:bor_edge_inst|present_state
+  9. State Machine - |adpll|dco:dco_inst|car_edge:car_edge_inst|present_state
+ 10. Registers Removed During Synthesis
+ 11. Removed Registers Triggering Further Register Optimizations
+ 12. General Register Statistics
+ 13. Port Connectivity Checks: "dco:dco_inst|dff_cont:dff_cont_inst"
+ 14. Port Connectivity Checks: "pfd:pfd_inst|d_ff:d_ff_2_map_ports"
+ 15. Port Connectivity Checks: "pfd:pfd_inst|d_ff:d_ff_1_map_ports"
+ 16. Post-Synthesis Netlist Statistics for Top Partition
+ 17. Elapsed Time Per Partition
+ 18. Analysis & Synthesis Messages
 
 
 
@@ -47,14 +50,14 @@ agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Mon Jul 05 19:48:53 2021       ;
+; Analysis & Synthesis Status     ; Successful - Sun Sep 05 20:42:55 2021       ;
 ; Quartus Prime Version           ; 15.1.0 Build 185 10/21/2015 SJ Lite Edition ;
 ; Revision Name                   ; trabalho-pll_V3                             ;
-; Top-level Entity Name           ; trabalho-pll_V3                             ;
+; Top-level Entity Name           ; adpll                                       ;
 ; Family                          ; Cyclone V                                   ;
 ; Logic utilization (in ALMs)     ; N/A                                         ;
 ; Total registers                 ; 0                                           ;
-; Total pins                      ; 4                                           ;
+; Total pins                      ; 6                                           ;
 ; Total virtual pins              ; 0                                           ;
 ; Total block memory bits         ; 0                                           ;
 ; Total DSP Blocks                ; 0                                           ;
@@ -73,7 +76,7 @@ agreement for further details.
 ; Option                                                                          ; Setting            ; Default Value      ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                                          ; 5CSEMA5F31C6       ;                    ;
-; Top-level entity name                                                           ; trabalho-pll_V3    ; trabalho-pll_V3    ;
+; Top-level entity name                                                           ; adpll              ; trabalho-pll_V3    ;
 ; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
 ; Use smart compilation                                                           ; Off                ; Off                ;
 ; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation      ; On                 ; On                 ;
@@ -171,43 +174,49 @@ agreement for further details.
 +----------------------------+-------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                           ;
-+----------------------------------+-----------------+------------------------------------+------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                                                 ; Library ;
-+----------------------------------+-----------------+------------------------------------+------------------------------------------------------------------------------+---------+
-; trabalho-pll_V3.bdf              ; yes             ; User Block Diagram/Schematic File  ; C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/trabalho-pll_V3.bdf ;         ;
-; pfd.vhd                          ; yes             ; User VHDL File                     ; C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/pfd.vhd             ;         ;
-; d_ff.vhd                         ; yes             ; User VHDL File                     ; C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/d_ff.vhd            ;         ;
-; divfreq.vhd                      ; yes             ; User VHDL File                     ; C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/divfreq.vhd         ;         ;
-+----------------------------------+-----------------+------------------------------------+------------------------------------------------------------------------------+---------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                  ;
++----------------------------------+-----------------+-----------------+------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                           ; Library ;
++----------------------------------+-----------------+-----------------+------------------------------------------------------------------------+---------+
+; adpll.vhd                        ; yes             ; User VHDL File  ; C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/adpll.vhd     ;         ;
+; dff_cont.vhd                     ; yes             ; User VHDL File  ; C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/dff_cont.vhd  ;         ;
+; car_edge.vhd                     ; yes             ; User VHDL File  ; C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/car_edge.vhd  ;         ;
+; bor_edge.vhd                     ; yes             ; User VHDL File  ; C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/bor_edge.vhd  ;         ;
+; pfd.vhd                          ; yes             ; User VHDL File  ; C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/pfd.vhd       ;         ;
+; d_ff.vhd                         ; yes             ; User VHDL File  ; C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/d_ff.vhd      ;         ;
+; divfreq.vhd                      ; yes             ; User VHDL File  ; C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/divfreq.vhd   ;         ;
+; k_counter.vhd                    ; yes             ; User VHDL File  ; C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd ;         ;
+; dco.vhd                          ; yes             ; User VHDL File  ; C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/dco.vhd       ;         ;
+; div8.vhd                         ; yes             ; User VHDL File  ; C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/div8.vhd      ;         ;
++----------------------------------+-----------------+-----------------+------------------------------------------------------------------------+---------+
 
 
-+---------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary             ;
-+---------------------------------------------+-----------+
-; Resource                                    ; Usage     ;
-+---------------------------------------------+-----------+
-; Estimate of Logic utilization (ALMs needed) ; 0         ;
-;                                             ;           ;
-; Combinational ALUT usage for logic          ; 0         ;
-;     -- 7 input functions                    ; 0         ;
-;     -- 6 input functions                    ; 0         ;
-;     -- 5 input functions                    ; 0         ;
-;     -- 4 input functions                    ; 0         ;
-;     -- <=3 input functions                  ; 0         ;
-;                                             ;           ;
-; Dedicated logic registers                   ; 0         ;
-;                                             ;           ;
-; I/O pins                                    ; 4         ;
-;                                             ;           ;
-; Total DSP Blocks                            ; 0         ;
-;                                             ;           ;
-; Maximum fan-out node                        ; up~output ;
-; Maximum fan-out                             ; 1         ;
-; Total fan-out                               ; 4         ;
-; Average fan-out                             ; 0.50      ;
-+---------------------------------------------+-----------+
++------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary          ;
++---------------------------------------------+--------+
+; Resource                                    ; Usage  ;
++---------------------------------------------+--------+
+; Estimate of Logic utilization (ALMs needed) ; 0      ;
+;                                             ;        ;
+; Combinational ALUT usage for logic          ; 0      ;
+;     -- 7 input functions                    ; 0      ;
+;     -- 6 input functions                    ; 0      ;
+;     -- 5 input functions                    ; 0      ;
+;     -- 4 input functions                    ; 0      ;
+;     -- <=3 input functions                  ; 0      ;
+;                                             ;        ;
+; Dedicated logic registers                   ; 0      ;
+;                                             ;        ;
+; I/O pins                                    ; 6      ;
+;                                             ;        ;
+; Total DSP Blocks                            ; 0      ;
+;                                             ;        ;
+; Maximum fan-out node                        ; kclock ;
+; Maximum fan-out                             ; 1      ;
+; Total fan-out                               ; 6      ;
+; Average fan-out                             ; 0.50   ;
++---------------------------------------------+--------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -215,31 +224,77 @@ agreement for further details.
 +----------------------------+-------------------+--------------+-------------------+------------+------+--------------+---------------------+--------------+
 ; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name ; Library Name ;
 +----------------------------+-------------------+--------------+-------------------+------------+------+--------------+---------------------+--------------+
-; |trabalho-pll_V3           ; 0 (0)             ; 0 (0)        ; 0                 ; 0          ; 4    ; 0            ; |trabalho-pll_V3    ; work         ;
+; |adpll                     ; 0 (0)             ; 0 (0)        ; 0                 ; 0          ; 6    ; 0            ; |adpll              ; work         ;
 +----------------------------+-------------------+--------------+-------------------+------------+------+--------------+---------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+--------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                             ;
-+---------------------------------------+----------------------------------------+
-; Register name                         ; Reason for Removal                     ;
-+---------------------------------------+----------------------------------------+
-; divfreq:inst|ot                       ; Stuck at GND due to stuck port clock   ;
-; pfd:inst1|d_ff:d_ff_1_map_ports|q     ; Stuck at GND due to stuck port clock   ;
-; pfd:inst1|d_ff:d_ff_2_map_ports|q     ; Stuck at VCC due to stuck port data_in ;
-; Total Number of Removed Registers = 3 ;                                        ;
-+---------------------------------------+----------------------------------------+
+Encoding Type:  One-Hot
++-------------------------------------------------------------------------------------------------------------------+
+; State Machine - |adpll|dco:dco_inst|bor_edge:bor_edge_inst|present_state                                          ;
++------------------------+----------------------+---------------------+------------------------+--------------------+
+; Name                   ; present_state.final2 ; present_state.final ; present_state.decision ; present_state.idle ;
++------------------------+----------------------+---------------------+------------------------+--------------------+
+; present_state.idle     ; 0                    ; 0                   ; 0                      ; 0                  ;
+; present_state.decision ; 0                    ; 0                   ; 1                      ; 1                  ;
+; present_state.final    ; 0                    ; 1                   ; 0                      ; 1                  ;
+; present_state.final2   ; 1                    ; 0                   ; 0                      ; 1                  ;
++------------------------+----------------------+---------------------+------------------------+--------------------+
 
 
-+------------------------------------------------------------------------------------+
-; Removed Registers Triggering Further Register Optimizations                        ;
-+-----------------+-------------------------+----------------------------------------+
-; Register name   ; Reason for Removal      ; Registers Removed due to This Register ;
-+-----------------+-------------------------+----------------------------------------+
-; divfreq:inst|ot ; Stuck at GND            ; pfd:inst1|d_ff:d_ff_1_map_ports|q      ;
-;                 ; due to stuck port clock ;                                        ;
-+-----------------+-------------------------+----------------------------------------+
+Encoding Type:  One-Hot
++----------------------------------------------------------------------------------------+
+; State Machine - |adpll|dco:dco_inst|car_edge:car_edge_inst|present_state               ;
++----------------------+----------------------+---------------------+--------------------+
+; Name                 ; present_state.final2 ; present_state.final ; present_state.idle ;
++----------------------+----------------------+---------------------+--------------------+
+; present_state.idle   ; 0                    ; 0                   ; 0                  ;
+; present_state.final  ; 0                    ; 1                   ; 1                  ;
+; present_state.final2 ; 1                    ; 0                   ; 1                  ;
++----------------------+----------------------+---------------------+--------------------+
+
+
++---------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                ;
++------------------------------------------------------------+--------------------------------------+
+; Register name                                              ; Reason for Removal                   ;
++------------------------------------------------------------+--------------------------------------+
+; dco:dco_inst|div8:div8_inst|div8                           ; Stuck at GND due to stuck port clock ;
+; dco:dco_inst|dff_cont:dff_cont_inst|toggleff               ; Lost fanout                          ;
+; pfd:pfd_inst|d_ff:d_ff_1_map_ports|q                       ; Lost fanout                          ;
+; pfd:pfd_inst|d_ff:d_ff_2_map_ports|q                       ; Lost fanout                          ;
+; divfreq:divfreq_inst|ot                                    ; Lost fanout                          ;
+; divfreq:divfreq_inst|count[0..18]                          ; Lost fanout                          ;
+; dco:dco_inst|bor_edge:bor_edge_inst|present_state.idle     ; Lost fanout                          ;
+; dco:dco_inst|bor_edge:bor_edge_inst|present_state.decision ; Lost fanout                          ;
+; dco:dco_inst|bor_edge:bor_edge_inst|present_state.final    ; Lost fanout                          ;
+; dco:dco_inst|bor_edge:bor_edge_inst|present_state.final2   ; Lost fanout                          ;
+; dco:dco_inst|car_edge:car_edge_inst|present_state.idle     ; Lost fanout                          ;
+; dco:dco_inst|car_edge:car_edge_inst|present_state.final    ; Lost fanout                          ;
+; dco:dco_inst|car_edge:car_edge_inst|present_state.final2   ; Lost fanout                          ;
+; Total Number of Removed Registers = 31                     ;                                      ;
++------------------------------------------------------------+--------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                         ;
++----------------------------------------------+--------------------+-----------------------------------------------------------------+
+; Register name                                ; Reason for Removal ; Registers Removed due to This Register                          ;
++----------------------------------------------+--------------------+-----------------------------------------------------------------+
+; pfd:pfd_inst|d_ff:d_ff_1_map_ports|q         ; Lost Fanouts       ; pfd:pfd_inst|d_ff:d_ff_2_map_ports|q, divfreq:divfreq_inst|ot,  ;
+;                                              ;                    ; divfreq:divfreq_inst|count[1], divfreq:divfreq_inst|count[6],   ;
+;                                              ;                    ; divfreq:divfreq_inst|count[8], divfreq:divfreq_inst|count[5],   ;
+;                                              ;                    ; divfreq:divfreq_inst|count[4], divfreq:divfreq_inst|count[3],   ;
+;                                              ;                    ; divfreq:divfreq_inst|count[2], divfreq:divfreq_inst|count[18],  ;
+;                                              ;                    ; divfreq:divfreq_inst|count[0], divfreq:divfreq_inst|count[7],   ;
+;                                              ;                    ; divfreq:divfreq_inst|count[9], divfreq:divfreq_inst|count[10],  ;
+;                                              ;                    ; divfreq:divfreq_inst|count[11], divfreq:divfreq_inst|count[12], ;
+;                                              ;                    ; divfreq:divfreq_inst|count[13], divfreq:divfreq_inst|count[14], ;
+;                                              ;                    ; divfreq:divfreq_inst|count[15], divfreq:divfreq_inst|count[16], ;
+;                                              ;                    ; divfreq:divfreq_inst|count[17]                                  ;
+; dco:dco_inst|dff_cont:dff_cont_inst|toggleff ; Lost Fanouts       ; dco:dco_inst|bor_edge:bor_edge_inst|present_state.final,        ;
+;                                              ;                    ; dco:dco_inst|car_edge:car_edge_inst|present_state.final         ;
++----------------------------------------------+--------------------+-----------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -258,7 +313,16 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 
 +----------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "pfd:inst1|d_ff:d_ff_2_map_ports"                                                    ;
+; Port Connectivity Checks: "dco:dco_inst|dff_cont:dff_cont_inst"                                                ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                             ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; flag ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "pfd:pfd_inst|d_ff:d_ff_2_map_ports"                                                 ;
 +------+--------+----------+-------------------------------------------------------------------------------------+
 ; Port ; Type   ; Severity ; Details                                                                             ;
 +------+--------+----------+-------------------------------------------------------------------------------------+
@@ -268,7 +332,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 
 +----------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "pfd:inst1|d_ff:d_ff_1_map_ports"                                                    ;
+; Port Connectivity Checks: "pfd:pfd_inst|d_ff:d_ff_1_map_ports"                                                 ;
 +------+--------+----------+-------------------------------------------------------------------------------------+
 ; Port ; Type   ; Severity ; Details                                                                             ;
 +------+--------+----------+-------------------------------------------------------------------------------------+
@@ -282,10 +346,10 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_lcell_comb     ; 2                           ;
-;     normal            ; 2                           ;
-;         0 data inputs ; 2                           ;
-; boundary_port         ; 4                           ;
+; arriav_lcell_comb     ; 1                           ;
+;     normal            ; 1                           ;
+;         0 data inputs ; 1                           ;
+; boundary_port         ; 6                           ;
 ;                       ;                             ;
 ; Max LUT depth         ; 0.00                        ;
 ; Average LUT depth     ; 0.00                        ;
@@ -307,13 +371,16 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
-    Info: Processing started: Mon Jul 05 19:48:20 2021
+    Info: Processing started: Sun Sep 05 20:42:35 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off trabalho-pll_V3 -c trabalho-pll_V3
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
+Info (12021): Found 2 design units, including 1 entities, in source file adpll.vhd
+    Info (12022): Found design unit 1: adpll-adpll_arch File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/adpll.vhd Line: 34
+    Info (12023): Found entity 1: adpll File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/adpll.vhd Line: 18
 Info (12021): Found 1 design units, including 1 entities, in source file trabalho-pll_v3.bdf
     Info (12023): Found entity 1: trabalho-pll_V3
 Info (12021): Found 2 design units, including 1 entities, in source file dff_cont.vhd
-    Info (12022): Found design unit 1: dff_cont-archcon File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/dff_cont.vhd Line: 29
+    Info (12022): Found design unit 1: dff_cont-arch_dff_cont File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/dff_cont.vhd Line: 29
     Info (12023): Found entity 1: dff_cont File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/dff_cont.vhd Line: 19
 Info (12021): Found 2 design units, including 1 entities, in source file car_edge.vhd
     Info (12022): Found design unit 1: car_edge-archedge File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/car_edge.vhd Line: 26
@@ -331,13 +398,13 @@ Info (12021): Found 2 design units, including 1 entities, in source file d_ff.vh
     Info (12022): Found design unit 1: d_ff-dff_arch File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/d_ff.vhd Line: 20
     Info (12023): Found entity 1: d_ff File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/d_ff.vhd Line: 14
 Info (12021): Found 2 design units, including 1 entities, in source file divfreq.vhd
-    Info (12022): Found design unit 1: divfreq-divfreq_arch File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/divfreq.vhd Line: 30
-    Info (12023): Found entity 1: divfreq File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/divfreq.vhd Line: 24
+    Info (12022): Found design unit 1: divfreq-divfreq_arch File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/divfreq.vhd Line: 31
+    Info (12023): Found entity 1: divfreq File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/divfreq.vhd Line: 25
 Info (12021): Found 2 design units, including 1 entities, in source file k_counter.vhd
     Info (12022): Found design unit 1: k_counter-k_counter_arch File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 26
     Info (12023): Found entity 1: k_counter File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 17
 Info (12021): Found 2 design units, including 1 entities, in source file dco.vhd
-    Info (12022): Found design unit 1: dco-dco_arch File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/dco.vhd Line: 29
+    Info (12022): Found design unit 1: dco-dco_arch File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/dco.vhd Line: 26
     Info (12023): Found entity 1: dco File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/dco.vhd Line: 16
 Info (12021): Found 2 design units, including 1 entities, in source file div4.vhd
     Info (12022): Found design unit 1: div4-div4_arch File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/div4.vhd Line: 25
@@ -348,27 +415,110 @@ Info (12021): Found 2 design units, including 1 entities, in source file tff.vhd
 Info (12021): Found 2 design units, including 1 entities, in source file div8.vhd
     Info (12022): Found design unit 1: div8-div8_arch File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/div8.vhd Line: 26
     Info (12023): Found entity 1: div8 File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/div8.vhd Line: 17
-Info (12127): Elaborating entity "trabalho-pll_V3" for the top level hierarchy
-Warning (275013): Port "clk" of type divfreq and instance "inst" is missing source signal
-Warning (275009): Pin "clk" not connected
-Info (12128): Elaborating entity "pfd" for hierarchy "pfd:inst1"
-Info (12128): Elaborating entity "d_ff" for hierarchy "pfd:inst1|d_ff:d_ff_1_map_ports" File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/pfd.vhd Line: 50
-Info (12128): Elaborating entity "divfreq" for hierarchy "divfreq:inst"
+Info (12127): Elaborating entity "adpll" for the top level hierarchy
+Info (12128): Elaborating entity "divfreq" for hierarchy "divfreq:divfreq_inst" File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/adpll.vhd Line: 94
+Info (12128): Elaborating entity "pfd" for hierarchy "pfd:pfd_inst" File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/adpll.vhd Line: 106
+Info (12128): Elaborating entity "d_ff" for hierarchy "pfd:pfd_inst|d_ff:d_ff_1_map_ports" File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/pfd.vhd Line: 50
+Info (12128): Elaborating entity "k_counter" for hierarchy "k_counter:k_counter_inst" File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/adpll.vhd Line: 120
+Warning (10492): VHDL Process Statement warning at k_counter.vhd(41): signal "sdown" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 41
+Warning (10492): VHDL Process Statement warning at k_counter.vhd(41): signal "sup" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 41
+Warning (10492): VHDL Process Statement warning at k_counter.vhd(42): signal "kcountup" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 42
+Warning (10492): VHDL Process Statement warning at k_counter.vhd(43): signal "kcountup" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 43
+Warning (10492): VHDL Process Statement warning at k_counter.vhd(47): signal "kcountup" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 47
+Warning (10631): VHDL Process Statement warning at k_counter.vhd(38): inferring latch(es) for signal or variable "kcountup", which holds its previous value in one or more paths through the process File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Warning (10492): VHDL Process Statement warning at k_counter.vhd(55): signal "sdown" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 55
+Warning (10492): VHDL Process Statement warning at k_counter.vhd(55): signal "sup" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 55
+Warning (10492): VHDL Process Statement warning at k_counter.vhd(56): signal "kcountdown" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 56
+Warning (10492): VHDL Process Statement warning at k_counter.vhd(57): signal "kcountdown" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 57
+Warning (10492): VHDL Process Statement warning at k_counter.vhd(61): signal "kcountdown" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 61
+Warning (10631): VHDL Process Statement warning at k_counter.vhd(52): inferring latch(es) for signal or variable "kcountdown", which holds its previous value in one or more paths through the process File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[0]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[1]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[2]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[3]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[4]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[5]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[6]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[7]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[8]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[9]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[10]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[11]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[12]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[13]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[14]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[15]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[16]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[17]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[18]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[19]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[20]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[21]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[22]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[23]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[24]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[25]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[26]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[27]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[28]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[29]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountdown[30]" at k_counter.vhd(52) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 52
+Info (10041): Inferred latch for "kcountup[0]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[1]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[2]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[3]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[4]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[5]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[6]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[7]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[8]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[9]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[10]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[11]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[12]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[13]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[14]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[15]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[16]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[17]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[18]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[19]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[20]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[21]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[22]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[23]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[24]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[25]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[26]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[27]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[28]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[29]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (10041): Inferred latch for "kcountup[30]" at k_counter.vhd(38) File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd Line: 38
+Info (12128): Elaborating entity "dco" for hierarchy "dco:dco_inst" File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/adpll.vhd Line: 134
+Info (12128): Elaborating entity "car_edge" for hierarchy "dco:dco_inst|car_edge:car_edge_inst" File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/dco.vhd Line: 72
+Warning (10492): VHDL Process Statement warning at car_edge.vhd(39): signal "toggle_ff" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/car_edge.vhd Line: 39
+Info (12128): Elaborating entity "bor_edge" for hierarchy "dco:dco_inst|bor_edge:bor_edge_inst" File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/dco.vhd Line: 80
+Warning (10492): VHDL Process Statement warning at bor_edge.vhd(39): signal "toggle_ff" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/bor_edge.vhd Line: 39
+Info (12128): Elaborating entity "dff_cont" for hierarchy "dco:dco_inst|dff_cont:dff_cont_inst" File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/dco.vhd Line: 87
+Info (12128): Elaborating entity "div8" for hierarchy "dco:dco_inst|div8:div8_inst" File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/dco.vhd Line: 101
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "up" is stuck at GND
-    Warning (13410): Pin "down" is stuck at VCC
+    Warning (13410): Pin "pll_out" is stuck at GND File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/adpll.vhd Line: 30
+Info (17049): 30 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 2 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "div"
-    Warning (15610): No output dependent on input pin "clk"
-Info (21057): Implemented 4 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 2 input pins
-    Info (21059): Implemented 2 output pins
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 9 warnings
-    Info: Peak virtual memory: 5022 megabytes
-    Info: Processing ended: Mon Jul 05 19:48:53 2021
-    Info: Elapsed time: 00:00:33
-    Info: Total CPU time (on all processors): 00:01:07
+Warning (21074): Design contains 5 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "kclock" File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/adpll.vhd Line: 23
+    Warning (15610): No output dependent on input pin "idclock" File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/adpll.vhd Line: 22
+    Warning (15610): No output dependent on input pin "b_in" File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/adpll.vhd Line: 25
+    Warning (15610): No output dependent on input pin "divfreq_in" File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/adpll.vhd Line: 26
+    Warning (15610): No output dependent on input pin "clk_sys" File: C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/adpll.vhd Line: 21
+Info (21057): Implemented 6 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 5 input pins
+    Info (21059): Implemented 1 output pins
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 23 warnings
+    Info: Peak virtual memory: 5024 megabytes
+    Info: Processing ended: Sun Sep 05 20:42:55 2021
+    Info: Elapsed time: 00:00:20
+    Info: Total CPU time (on all processors): 00:00:42
 
 

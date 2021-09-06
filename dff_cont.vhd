@@ -1,6 +1,6 @@
 -- ****************************************************
 -- Program: dff_cont.vhd
--- Description: Carry Edge Counter
+-- Description: D Flip-Flop Counter
 --		Code based in Ahramed Allam work
 --		(http://www.ece.ualberta.ca/~elliott/ee552/studentAppNotes/1999f/DigitalPhaseLockedLoop/)
 -- Input: flag_carr,Flag_borr,clock
@@ -18,42 +18,41 @@ use ieee.std_logic_unsigned.all;
 
 entity dff_cont is
    port (
-      flag_carr,Flag_borr,clock: in std_logic; 
-      toggleff : buffer std_logic; 
-      idout : out  std_logic;
-      flag  : buffer std_logic                           
+      flag_carr,Flag_borr,clock	: in std_logic; 
+      toggleff 						: buffer std_logic; 
+      idout 							: out  std_logic;
+      flag  							: buffer std_logic                           
    ); 
 end dff_cont; 
 
 
-architecture archcon of dff_cont is 
+architecture arch_dff_cont of dff_cont is 
 
    begin 
 
    -- Proces that sets the value of the inputs to the 
    -- j and k input of the flip flop.
-   dff_control:process (Flag_carr, flag_borr)
-
-   begin 
-       if  (Flag_carr= '1' or Flag_borr = '1') then  
-	   Flag  <= '0' ;
-       else 
-           Flag  <= '1';        
-       end if ;
-   end process  dff_control;
+	
+   dff_control:process (flag_carr, flag_borr)
+		begin 
+			 if (flag_carr= '1' or flag_borr = '1') then  
+				flag  <= '0';
+			 else 
+				flag  <= '1';        
+			 end if;
+		end process  dff_control;
 
 
    -- process that changes the frequency of the IDout 
 
    jk:process (clock)
+		begin 
+			if (clock 'event and clock = '1') then 
+				toggleff <= (  flag  and not toggleff ) or (not flag and toggleff);
+			 end if ; 
+		end process jk;
 
-   begin 
-      if clock 'event and clock = '1' then 
-         ToggleFF <= (  Flag  and not ToggleFF ) or (not Flag and ToggleFF) ;
-       end if ; 
-   end process jk;
 
+   idout <= not clock and not toggleff; 
 
-   IDout <= not clock and not ToggleFF; 
-
-end archcon; 
+end arch_dff_cont; 

@@ -17,7 +17,7 @@
 -- PROGRAM "Quartus Prime"
 -- VERSION "Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition"
 
--- DATE "07/05/2021 19:51:12"
+-- DATE "09/05/2021 20:44:45"
 
 -- 
 -- Device: Altera 5CSEMA5F31C6 Package FBGA896
@@ -34,23 +34,27 @@ USE ALTERA_LNSIM.ALTERA_LNSIM_COMPONENTS.ALL;
 USE CYCLONEV.CYCLONEV_COMPONENTS.ALL;
 USE IEEE.STD_LOGIC_1164.ALL;
 
-ENTITY 	\trabalho-pll_V3\ IS
+ENTITY 	adpll IS
     PORT (
-	up : OUT std_logic;
-	div : IN std_logic;
-	down : OUT std_logic;
-	clk : IN std_logic
+	clk_sys : IN std_logic;
+	idclock : IN std_logic;
+	kclock : IN std_logic;
+	b_in : IN std_logic;
+	divfreq_in : IN std_logic;
+	pll_out : BUFFER std_logic
 	);
-END \trabalho-pll_V3\;
+END adpll;
 
 -- Design Ports Information
--- up	=>  Location: PIN_E3,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- div	=>  Location: PIN_AH28,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- down	=>  Location: PIN_AB22,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- clk	=>  Location: PIN_AC20,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- kclock	=>  Location: PIN_AG8,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- pll_out	=>  Location: PIN_E3,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- idclock	=>  Location: PIN_AH28,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- b_in	=>  Location: PIN_AD20,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- divfreq_in	=>  Location: PIN_AD30,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- clk_sys	=>  Location: PIN_AK3,	 I/O Standard: 2.5 V,	 Current Strength: Default
 
 
-ARCHITECTURE structure OF \trabalho-pll_V3\ IS
+ARCHITECTURE structure OF adpll IS
 SIGNAL gnd : std_logic := '0';
 SIGNAL vcc : std_logic := '1';
 SIGNAL unknown : std_logic := 'X';
@@ -60,26 +64,33 @@ SIGNAL devpor : std_logic := '1';
 SIGNAL ww_devoe : std_logic;
 SIGNAL ww_devclrn : std_logic;
 SIGNAL ww_devpor : std_logic;
-SIGNAL ww_up : std_logic;
-SIGNAL ww_div : std_logic;
-SIGNAL ww_down : std_logic;
-SIGNAL ww_clk : std_logic;
-SIGNAL \div~input_o\ : std_logic;
-SIGNAL \clk~input_o\ : std_logic;
+SIGNAL ww_clk_sys : std_logic;
+SIGNAL ww_idclock : std_logic;
+SIGNAL ww_kclock : std_logic;
+SIGNAL ww_b_in : std_logic;
+SIGNAL ww_divfreq_in : std_logic;
+SIGNAL ww_pll_out : std_logic;
+SIGNAL \kclock~input_o\ : std_logic;
+SIGNAL \idclock~input_o\ : std_logic;
+SIGNAL \b_in~input_o\ : std_logic;
+SIGNAL \divfreq_in~input_o\ : std_logic;
+SIGNAL \clk_sys~input_o\ : std_logic;
 SIGNAL \~QUARTUS_CREATED_GND~I_combout\ : std_logic;
 
 BEGIN
 
-up <= ww_up;
-ww_div <= div;
-down <= ww_down;
-ww_clk <= clk;
+ww_clk_sys <= clk_sys;
+ww_idclock <= idclock;
+ww_kclock <= kclock;
+ww_b_in <= b_in;
+ww_divfreq_in <= divfreq_in;
+pll_out <= ww_pll_out;
 ww_devoe <= devoe;
 ww_devclrn <= devclrn;
 ww_devpor <= devpor;
 
 -- Location: IOOBUF_X8_Y81_N36
-\up~output\ : cyclonev_io_obuf
+\pll_out~output\ : cyclonev_io_obuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
@@ -89,44 +100,64 @@ GENERIC MAP (
 PORT MAP (
 	i => GND,
 	devoe => ww_devoe,
-	o => ww_up);
+	o => ww_pll_out);
 
--- Location: IOOBUF_X89_Y9_N5
-\down~output\ : cyclonev_io_obuf
+-- Location: IOIBUF_X8_Y0_N52
+\kclock~input\ : cyclonev_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
-	open_drain_output => "false",
-	shift_series_termination_control => "false")
+	simulate_z_as => "z")
 -- pragma translate_on
 PORT MAP (
-	i => VCC,
-	devoe => ww_devoe,
-	o => ww_down);
+	i => ww_kclock,
+	o => \kclock~input_o\);
 
 -- Location: IOIBUF_X89_Y4_N95
-\div~input\ : cyclonev_io_ibuf
+\idclock~input\ : cyclonev_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
 	simulate_z_as => "z")
 -- pragma translate_on
 PORT MAP (
-	i => ww_div,
-	o => \div~input_o\);
+	i => ww_idclock,
+	o => \idclock~input_o\);
 
--- Location: IOIBUF_X76_Y0_N1
-\clk~input\ : cyclonev_io_ibuf
+-- Location: IOIBUF_X82_Y0_N41
+\b_in~input\ : cyclonev_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
 	simulate_z_as => "z")
 -- pragma translate_on
 PORT MAP (
-	i => ww_clk,
-	o => \clk~input_o\);
+	i => ww_b_in,
+	o => \b_in~input_o\);
 
--- Location: MLABCELL_X52_Y35_N0
+-- Location: IOIBUF_X89_Y25_N38
+\divfreq_in~input\ : cyclonev_io_ibuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	simulate_z_as => "z")
+-- pragma translate_on
+PORT MAP (
+	i => ww_divfreq_in,
+	o => \divfreq_in~input_o\);
+
+-- Location: IOIBUF_X20_Y0_N52
+\clk_sys~input\ : cyclonev_io_ibuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	simulate_z_as => "z")
+-- pragma translate_on
+PORT MAP (
+	i => ww_clk_sys,
+	o => \clk_sys~input_o\);
+
+-- Location: LABCELL_X36_Y28_N0
 \~QUARTUS_CREATED_GND~I\ : cyclonev_lcell_comb
 -- Equation(s):
 

@@ -11,72 +11,123 @@
 # ** Warning: Copied C:/altera/15.1/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini.
 #          Updated modelsim.ini.
 # 
+# vcom -93 -work work {C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/adpll.vhd}
+# Model Technology ModelSim ALTERA vcom 10.4b Compiler 2015.05 May 27 2015
+# Start time: 21:23:14 on Sep 05,2021
+# vcom -reportprogress 300 -93 -work work C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/adpll.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity adpll
+# -- Compiling architecture adpll_arch of adpll
+# End time: 21:23:14 on Sep 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/dff_cont.vhd}
+# Model Technology ModelSim ALTERA vcom 10.4b Compiler 2015.05 May 27 2015
+# Start time: 21:23:14 on Sep 05,2021
+# vcom -reportprogress 300 -93 -work work C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/dff_cont.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling entity dff_cont
+# -- Compiling architecture arch_dff_cont of dff_cont
+# End time: 21:23:14 on Sep 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/car_edge.vhd}
+# Model Technology ModelSim ALTERA vcom 10.4b Compiler 2015.05 May 27 2015
+# Start time: 21:23:14 on Sep 05,2021
+# vcom -reportprogress 300 -93 -work work C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/car_edge.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling entity car_edge
+# -- Compiling architecture archedge of car_edge
+# End time: 21:23:14 on Sep 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/bor_edge.vhd}
+# Model Technology ModelSim ALTERA vcom 10.4b Compiler 2015.05 May 27 2015
+# Start time: 21:23:14 on Sep 05,2021
+# vcom -reportprogress 300 -93 -work work C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/bor_edge.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling entity bor_edge
+# -- Compiling architecture archedge of bor_edge
+# End time: 21:23:14 on Sep 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
 # vcom -93 -work work {C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/pfd.vhd}
 # Model Technology ModelSim ALTERA vcom 10.4b Compiler 2015.05 May 27 2015
-# Start time: 19:51:40 on Jul 05,2021
+# Start time: 21:23:14 on Sep 05,2021
 # vcom -reportprogress 300 -93 -work work C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/pfd.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Compiling entity pfd
 # -- Compiling architecture pfd_arch of pfd
-# End time: 19:51:40 on Jul 05,2021, Elapsed time: 0:00:00
+# End time: 21:23:14 on Sep 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vcom -93 -work work {C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/d_ff.vhd}
 # Model Technology ModelSim ALTERA vcom 10.4b Compiler 2015.05 May 27 2015
-# Start time: 19:51:41 on Jul 05,2021
+# Start time: 21:23:14 on Sep 05,2021
 # vcom -reportprogress 300 -93 -work work C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/d_ff.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Compiling entity d_ff
 # -- Compiling architecture dff_arch of d_ff
-# End time: 19:51:41 on Jul 05,2021, Elapsed time: 0:00:00
+# End time: 21:23:14 on Sep 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vcom -93 -work work {C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/divfreq.vhd}
 # Model Technology ModelSim ALTERA vcom 10.4b Compiler 2015.05 May 27 2015
-# Start time: 19:51:41 on Jul 05,2021
+# Start time: 21:23:14 on Sep 05,2021
 # vcom -reportprogress 300 -93 -work work C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/divfreq.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Compiling entity divfreq
 # -- Compiling architecture divfreq_arch of divfreq
-# End time: 19:51:41 on Jul 05,2021, Elapsed time: 0:00:00
+# End time: 21:23:14 on Sep 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd}
+# Model Technology ModelSim ALTERA vcom 10.4b Compiler 2015.05 May 27 2015
+# Start time: 21:23:14 on Sep 05,2021
+# vcom -reportprogress 300 -93 -work work C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/k_counter.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity k_counter
+# -- Compiling architecture k_counter_arch of k_counter
+# End time: 21:23:14 on Sep 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/dco.vhd}
+# Model Technology ModelSim ALTERA vcom 10.4b Compiler 2015.05 May 27 2015
+# Start time: 21:23:15 on Sep 05,2021
+# vcom -reportprogress 300 -93 -work work C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/dco.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity dco
+# -- Compiling architecture dco_arch of dco
+# End time: 21:23:15 on Sep 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/div8.vhd}
+# Model Technology ModelSim ALTERA vcom 10.4b Compiler 2015.05 May 27 2015
+# Start time: 21:23:15 on Sep 05,2021
+# vcom -reportprogress 300 -93 -work work C:/Users/wwagn/OneDrive/Documentos/projetos/trabalho-pll/div8.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling entity div8
+# -- Compiling architecture div8_arch of div8
+# End time: 21:23:15 on Sep 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
-vsim work.divfreq work.pfd
-# vsim work.divfreq work.pfd 
-# Start time: 19:51:49 on Jul 05,2021
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading work.divfreq(divfreq_arch)
-# Loading work.pfd(pfd_arch)
-# Loading work.d_ff(dff_arch)
-add wave -position insertpoint  \
-sim:/divfreq/clk
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-# 
-#           File in use by: Paulo  Hostname: PAULO  ProcessID: 5492
-# 
-#           Attempting to use alternate WLF file "./wlftawvvid".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-# 
-#           Using alternate file: ./wlftawvvid
-# 
-add wave -position insertpoint  \
-sim:/divfreq/ref
-add wave -position insertpoint  \
-sim:/pfd/a
-add wave -position insertpoint  \
-sim:/pfd/b
-add wave -position insertpoint  \
-sim:/pfd/up
-add wave -position insertpoint  \
-sim:/pfd/down
-force -freeze sim:/divfreq/clk 0 0, 1 {10000 ps} -r 20ns
-force -freeze sim:/pfd/b 0 4ms, 1 {12335000000 ps} -r 16.67ms
-run
-# End time: 19:56:30 on Jul 05,2021, Elapsed time: 0:04:41
-# Errors: 0, Warnings: 2
