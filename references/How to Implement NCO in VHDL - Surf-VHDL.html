@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)https://surf-vhdl.com/how-to-implement-nco-vhdl/ -->
+<html class="no-js" lang="en-US"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" src="./How to Implement NCO in VHDL - Surf-VHDL_files/recaptcha__pt_br.js" crossorigin="anonymous" integrity="sha384-+TpLsKQyqRbIfwbAgjyXJLYAQ9ffjUCj/Yv6SVygsRqxklJPSm+w33TOGWLYk+mK"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1f4ac1">
+<link rel="profile" href="http://gmpg.org/xfn/11"><script src="./How to Implement NCO in VHDL - Surf-VHDL_files/cb=gapi.loaded_1" async=""></script><script src="./How to Implement NCO in VHDL - Surf-VHDL_files/cb=gapi.loaded_0" async=""></script><script src="./How to Implement NCO in VHDL - Surf-VHDL_files/all.js" async="" crossorigin="anonymous"></script><script type="text/javascript" async="" src="./How to Implement NCO in VHDL - Surf-VHDL_files/plusone.js" gapi_processed="true"></script><script id="twitter-wjs" src="./How to Implement NCO in VHDL - Surf-VHDL_files/widgets.js"></script><script src="./How to Implement NCO in VHDL - Surf-VHDL_files/700641506704378" async=""></script><script id="facebook-jssdk" src="./How to Implement NCO in VHDL - Surf-VHDL_files/all(1).js"></script><script async="" src="./How to Implement NCO in VHDL - Surf-VHDL_files/fbevents.js"></script><script async="" src="./How to Implement NCO in VHDL - Surf-VHDL_files/gtm.js"></script><script async="" src="./How to Implement NCO in VHDL - Surf-VHDL_files/analytics.js"></script><script data-dapp-detection="">!function(){let e=!1;function n(){if(!e){const n=document.createElement("meta");n.name="dapp-detected",document.head.appendChild(n),e=!0}}if(window.hasOwnProperty("ethereum")){if(window.__disableDappDetectionInsertion=!0,void 0===window.ethereum)return;n()}else{var t=window.ethereum;Object.defineProperty(window,"ethereum",{configurable:!0,enumerable:!1,set:function(e){window.__disableDappDetectionInsertion||n(),t=e},get:function(){if(!window.__disableDappDetectionInsertion){const e=arguments.callee;e&&e.caller&&e.caller.toString&&-1!==e.caller.toString().indexOf("getOwnPropertyNames")||n()}return t}})}}();</script>
+
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+	<!-- This site is optimized with the Yoast SEO plugin v17.0 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>How to Implement NCO in VHDL - Surf-VHDL</title>
+	<meta name="description" content="Numerically Controlled Oscillator (NCO) allows you to generate a programmable digital waveform. Here a complete architecture and VHDL implementation.">
+	<link rel="canonical" href="https://surf-vhdl.com/how-to-implement-nco-vhdl/">
+	<meta property="og:locale" content="en_US">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="How to Implement NCO in VHDL - Surf-VHDL">
+	<meta property="og:description" content="Understand how to implement an NCO in FPGA using VHDL">
+	<meta property="og:url" content="https://surf-vhdl.com/how-to-implement-nco-vhdl/">
+	<meta property="og:site_name" content="Surf-VHDL">
+	<meta property="article:publisher" content="https://www.facebook.com/SurfVHDL">
+	<meta property="article:published_time" content="2017-02-03T16:59:48+00:00">
+	<meta property="article:modified_time" content="2017-10-07T19:26:29+00:00">
+	<meta property="og:image" content="https://surf-vhdl.com/wp/wp-content/uploads/2017/02/NCO-start-phase.jpg">
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="628">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:label1" content="Written by">
+	<meta name="twitter:data1" content="Surf-VHDL">
+	<meta name="twitter:label2" content="Est. reading time">
+	<meta name="twitter:data2" content="7 minutes">
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://surf-vhdl.com/#website","url":"https://surf-vhdl.com/","name":"Surf-VHDL","description":"The Easiest Way To Learn VHDL","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://surf-vhdl.com/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://surf-vhdl.com/how-to-implement-nco-vhdl/#primaryimage","inLanguage":"en-US","url":"https://surf-vhdl.com/wp/wp-content/uploads/2017/02/NCO-start-phase.jpg","contentUrl":"https://surf-vhdl.com/wp/wp-content/uploads/2017/02/NCO-start-phase.jpg","width":1200,"height":628,"caption":"Figure 6 - NCO with Start-Phase control"},{"@type":"WebPage","@id":"https://surf-vhdl.com/how-to-implement-nco-vhdl/#webpage","url":"https://surf-vhdl.com/how-to-implement-nco-vhdl/","name":"How to Implement NCO in VHDL - Surf-VHDL","isPartOf":{"@id":"https://surf-vhdl.com/#website"},"primaryImageOfPage":{"@id":"https://surf-vhdl.com/how-to-implement-nco-vhdl/#primaryimage"},"datePublished":"2017-02-03T16:59:48+00:00","dateModified":"2017-10-07T19:26:29+00:00","author":{"@id":"https://surf-vhdl.com/#/schema/person/6fb67357fc06d3755ae14459530aaf1a"},"description":"Numerically Controlled Oscillator (NCO) allows you to generate a programmable digital waveform. Here a complete architecture and VHDL implementation.","breadcrumb":{"@id":"https://surf-vhdl.com/how-to-implement-nco-vhdl/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://surf-vhdl.com/how-to-implement-nco-vhdl/"]}]},{"@type":"BreadcrumbList","@id":"https://surf-vhdl.com/how-to-implement-nco-vhdl/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://surf-vhdl.com/"},{"@type":"ListItem","position":2,"name":"How to Implement NCO in VHDL"}]},{"@type":"Person","@id":"https://surf-vhdl.com/#/schema/person/6fb67357fc06d3755ae14459530aaf1a","name":"Surf-VHDL","image":{"@type":"ImageObject","@id":"https://surf-vhdl.com/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/e5ba4adfcd363787e0d0e8f46f71dd96?s=96&d=mm&r=g","contentUrl":"https://secure.gravatar.com/avatar/e5ba4adfcd363787e0d0e8f46f71dd96?s=96&d=mm&r=g","caption":"Surf-VHDL"},"url":"https://surf-vhdl.com/author/francesco/"}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Surf-VHDL » Feed" href="https://surf-vhdl.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="Surf-VHDL » Comments Feed" href="https://surf-vhdl.com/comments/feed/">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-63495101-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TRTBDFD');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '700641506704378');
+fbq('track', 'PageView');
+fbq('trackCustom', 'ViewSite');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=700641506704378&ev=PageView&noscript=1"
+/></noscript>
+<!-- DO NOT MODIFY -->
+<!-- End Facebook Pixel Code -->
+<link rel="alternate" type="application/rss+xml" title="Surf-VHDL » How to Implement NCO in VHDL Comments Feed" href="https://surf-vhdl.com/how-to-implement-nco-vhdl/feed/">
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/surf-vhdl.com\/wp\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./How to Implement NCO in VHDL - Surf-VHDL_files/wp-emoji-release.min.js" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="stylesheet" id="wp-block-library-css" href="./How to Implement NCO in VHDL - Surf-VHDL_files/style.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="activecampaign-form-block-css" href="./How to Implement NCO in VHDL - Surf-VHDL_files/style-index.css" type="text/css" media="all">
+<link rel="stylesheet" id="titan-adminbar-styles-css" href="./How to Implement NCO in VHDL - Surf-VHDL_files/admin-bar.css" type="text/css" media="all">
+<link rel="stylesheet" id="sparkling-bootstrap-css" href="./How to Implement NCO in VHDL - Surf-VHDL_files/bootstrap.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="sparkling-icons-css" href="./How to Implement NCO in VHDL - Surf-VHDL_files/fontawesome-all.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="sparkling-fonts-css" href="./How to Implement NCO in VHDL - Surf-VHDL_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="sparkling-style-css" href="./How to Implement NCO in VHDL - Surf-VHDL_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="enlighterjs-css" href="./How to Implement NCO in VHDL - Surf-VHDL_files/enlighterjs.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="optimizepress-default-css" href="./How to Implement NCO in VHDL - Surf-VHDL_files/default.min.css" type="text/css" media="all">
+<script type="text/javascript" src="./How to Implement NCO in VHDL - Surf-VHDL_files/jquery.min.js" id="jquery-core-js"></script>
+<script type="text/javascript" src="./How to Implement NCO in VHDL - Surf-VHDL_files/jquery-migrate.min.js" id="jquery-migrate-js"></script>
+<script type="text/javascript" id="optimizepress-op-jquery-base-all-js-extra">
+/* <![CDATA[ */
+var OptimizePress = {"ajaxurl":"https:\/\/surf-vhdl.com\/wp\/wp-admin\/admin-ajax.php","SN":"optimizepress","version":"2.5.25","script_debug":".min","localStorageEnabled":"","wp_admin_page":"","op_live_editor":"","op_page_builder":"","op_create_new_page":"","imgurl":"https:\/\/surf-vhdl.com\/wp\/wp-content\/plugins\/optimizePressPlugin\/lib\/images\/","OP_URL":"https:\/\/surf-vhdl.com\/wp\/wp-content\/plugins\/optimizePressPlugin\/","OP_JS":"https:\/\/surf-vhdl.com\/wp\/wp-content\/plugins\/optimizePressPlugin\/lib\/js\/","OP_PAGE_BUILDER_URL":"","include_url":"https:\/\/surf-vhdl.com\/wp\/wp-includes\/","op_autosave_interval":"300","op_autosave_enabled":"Y","paths":{"url":"https:\/\/surf-vhdl.com\/wp\/wp-content\/plugins\/optimizePressPlugin\/","img":"https:\/\/surf-vhdl.com\/wp\/wp-content\/plugins\/optimizePressPlugin\/lib\/images\/","js":"https:\/\/surf-vhdl.com\/wp\/wp-content\/plugins\/optimizePressPlugin\/lib\/js\/","css":"https:\/\/surf-vhdl.com\/wp\/wp-content\/plugins\/optimizePressPlugin\/lib\/css\/"},"social":{"twitter":"optimizepress","facebook":"optimizepress","googleplus":"111273444733787349971"},"flowplayerHTML5":"https:\/\/surf-vhdl.com\/wp\/wp-content\/plugins\/optimizePressPlugin\/lib\/modules\/blog\/video\/flowplayer\/flowplayer.swf","flowplayerKey":"","flowplayerLogo":"","mediaelementplayer":"https:\/\/surf-vhdl.com\/wp\/wp-content\/plugins\/optimizePressPlugin\/lib\/modules\/blog\/video\/mediaelement\/","pb_unload_alert":"This page is asking you to confirm that you want to leave - data you have entered may not be saved.","pb_save_alert":"Please make sure you are happy with all of your options as some options will not be able to be changed for this page later.","search_default":"Search...","ems_providers":{"activecampaign":"ActiveCampaign","getresponse":"GetResponse"},"optimizemember":{"enabled":false,"version":"0"},"OP_LEADS_URL":"https:\/\/my.optimizeleads.com\/","OP_LEADS_THEMES_URL":"https:\/\/my.optimizeleads.com\/build\/themes\/","google_recaptcha_site_key":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./How to Implement NCO in VHDL - Surf-VHDL_files/op-jquery-base-all.min.js" id="optimizepress-op-jquery-base-all-js"></script>
+<script type="text/javascript" src="./How to Implement NCO in VHDL - Surf-VHDL_files/bootstrap.min.js" id="sparkling-bootstrapjs-js"></script>
+<script type="text/javascript" src="./How to Implement NCO in VHDL - Surf-VHDL_files/functions.js" id="sparkling-functions-js"></script>
+<link rel="https://api.w.org/" href="https://surf-vhdl.com/wp-json/"><link rel="alternate" type="application/json" href="https://surf-vhdl.com/wp-json/wp/v2/posts/1274"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://surf-vhdl.com/wp/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://surf-vhdl.com/wp/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 5.8">
+<link rel="shortlink" href="https://surf-vhdl.com/?p=1274">
+<link rel="alternate" type="application/json+oembed" href="https://surf-vhdl.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fsurf-vhdl.com%2Fhow-to-implement-nco-vhdl%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://surf-vhdl.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fsurf-vhdl.com%2Fhow-to-implement-nco-vhdl%2F&amp;format=xml">
+<script type="text/javascript" data-cfasync="false">var _mmunch = {'front': false, 'page': false, 'post': false, 'category': false, 'author': false, 'search': false, 'attachment': false, 'tag': false};_mmunch['post'] = true; _mmunch['postData'] = {"ID":1274,"post_name":"how-to-implement-nco-vhdl","post_title":"How to Implement NCO in VHDL","post_type":"post","post_author":"1","post_status":"publish"}; _mmunch['postCategories'] = [{"term_id":9,"name":"Signal Processing","slug":"signal-processing","term_group":0,"term_taxonomy_id":9,"taxonomy":"category","description":"","parent":0,"count":12,"filter":"raw","cat_ID":9,"category_count":12,"category_description":"","cat_name":"Signal Processing","category_nicename":"signal-processing","category_parent":0},{"term_id":7,"name":"VHDL","slug":"vhdl","term_group":0,"term_taxonomy_id":7,"taxonomy":"category","description":"","parent":0,"count":48,"filter":"raw","cat_ID":7,"category_count":48,"category_description":"","cat_name":"VHDL","category_nicename":"vhdl","category_parent":0}]; _mmunch['postTags'] = false; _mmunch['postAuthor'] = {"name":"Surf-VHDL","ID":1};</script><script data-cfasync="false" src="./How to Implement NCO in VHDL - Surf-VHDL_files/site.js" id="mailmunch-script" data-plugin="mailmunch" data-mailmunch-site-id="58051" async=""></script><style type="text/css">a, #infinite-handle span, #secondary .widget .post-content a, .entry-meta a {color:#1e73be}a:hover, a:focus, a:active, #secondary .widget .post-content a:hover, #secondary .widget .post-content a:focus, .woocommerce nav.woocommerce-pagination ul li a:focus, .woocommerce nav.woocommerce-pagination ul li a:hover, .woocommerce nav.woocommerce-pagination ul li span.current, #secondary .widget a:hover, #secondary .widget a:focus {color: #8924e2;}.btn-default, .label-default, .flex-caption h2, .btn.btn-default.read-more,button,
+              .navigation .wp-pagenavi-pagination span.current,.navigation .wp-pagenavi-pagination a:hover,
+              .woocommerce a.button, .woocommerce button.button,
+              .woocommerce input.button, .woocommerce #respond input#submit.alt,
+              .woocommerce a.button, .woocommerce button.button,
+              .woocommerce a.button.alt, .woocommerce button.button.alt, .woocommerce input.button.alt { background-color: #335ee0; border-color: #335ee0;}.site-main [class*="navigation"] a, .more-link, .pagination>li>a, .pagination>li>span, .cfa-button { color: #335ee0}.cfa-button {border-color: #335ee0;}.btn-default:hover, .btn-default:focus,.label-default[href]:hover, .label-default[href]:focus, .tagcloud a:hover, .tagcloud a:focus, button, .main-content [class*="navigation"] a:hover, .main-content [class*="navigation"] a:focus, #infinite-handle span:hover, #infinite-handle span:focus-within, .btn.btn-default.read-more:hover, .btn.btn-default.read-more:focus, .btn-default:hover, .btn-default:focus, .scroll-to-top:hover, .scroll-to-top:focus, .btn-default:active, .btn-default.active, .site-main [class*="navigation"] a:hover, .site-main [class*="navigation"] a:focus, .more-link:hover, .more-link:focus, #image-navigation .nav-previous a:hover, #image-navigation .nav-previous a:focus, #image-navigation .nav-next a:hover, #image-navigation .nav-next a:focus, .cfa-button:hover, .cfa-button:focus, .woocommerce a.button:hover, .woocommerce a.button:focus, .woocommerce button.button:hover, .woocommerce button.button:focus, .woocommerce input.button:hover, .woocommerce input.button:focus, .woocommerce #respond input#submit.alt:hover, .woocommerce #respond input#submit.alt:focus, .woocommerce a.button:hover, .woocommerce a.button:focus, .woocommerce button.button:hover, .woocommerce button.button:focus, .woocommerce input.button:hover, .woocommerce input.button:focus, .woocommerce a.button.alt:hover, .woocommerce a.button.alt:focus, .woocommerce button.button.alt:hover, .woocommerce button.button.alt:focus, .woocommerce input.button.alt:hover, .woocommerce input.button.alt:focus, a:hover .flex-caption h2 { background-color: #d14040; border-color: #d14040; }.pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus-within, .pagination>li>span:hover {color: #d14040;}h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .entry-title, .entry-title a {color: #2150d1;}.navbar.navbar-default, .navbar-default .navbar-nav .open .dropdown-menu > li > a {background-color: #1f4ac1;}.dropdown-menu {background-color: #1f4ac1;}.navbar-default .navbar-nav .open .dropdown-menu > li > a, .dropdown-menu > li > a, .dropdown-menu > li > .caret { color: #eeee22;}.navbar-default .navbar-nav .dropdown-menu > li:hover, .navbar-default .navbar-nav .dropdown-menu > li:focus-within, .dropdown-menu > .active {background-color: #1e73be;}@media (max-width: 767px) {.navbar-default .navbar-nav .dropdown-menu > li:hover, .navbar-default .navbar-nav .dropdown-menu > li:focus, .dropdown-menu > .active {background: transparent;} }.dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>.caret, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover, .dropdown-menu>li:hover>a, .dropdown-menu>li:hover>.caret {color:#eeee22;}@media (max-width: 767px) {.navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .dropdown-menu > li.active > .caret, .navbar-default .navbar-nav .dropdown-menu > li.open > a, .navbar-default .navbar-nav li.open > a, .navbar-default .navbar-nav li.open > .caret {color:#eeee22;} }.navbar-default .navbar-nav .current-menu-ancestor a.dropdown-toggle { color: #eeee22;}#colophon {background-color: #1f4ac1;}#footer-area, .site-info, .site-info caption, #footer-area caption {color: #ffffff;}.site-info a, #footer-area a {color: #d6b731;}body, .entry-content {color:#000000}.entry-content {font-family: Arial;}.entry-content {font-size:18px}.entry-content {font-weight:normal}</style>
+        <!--[if (gte IE 6)&(lte IE 8)]>
+            <script type="text/javascript" src="https://surf-vhdl.com/wp/wp-content/plugins/optimizePressPlugin/lib/js/selectivizr-1.0.2-min.js?ver=1.0.2"></script>
+        <![endif]-->
+        <!--[if lt IE 9]>
+            <script src="https://surf-vhdl.com/wp/wp-content/plugins/optimizePressPlugin/lib/js//html5shiv.min.js"></script>
+        <![endif]-->
+    
+            <meta property="fb:app_id" content="403471369858290">
+        		<style type="text/css">
+				.navbar > .container .navbar-brand {
+			color: #dadada;
+		}
+		</style>
+	
+<link rel="icon" href="https://surf-vhdl.com/wp/wp-content/uploads/2016/11/cropped-SURFVHDL_400x400-32x32.jpg" sizes="32x32">
+<link rel="icon" href="https://surf-vhdl.com/wp/wp-content/uploads/2016/11/cropped-SURFVHDL_400x400-192x192.jpg" sizes="192x192">
+<link rel="apple-touch-icon" href="https://surf-vhdl.com/wp/wp-content/uploads/2016/11/cropped-SURFVHDL_400x400-180x180.jpg">
+<meta name="msapplication-TileImage" content="https://surf-vhdl.com/wp/wp-content/uploads/2016/11/cropped-SURFVHDL_400x400-270x270.jpg">
+
+                <style type="text/css">
+                [class*="rltcp_"]{box-sizing: border-box !important;}
+                .rltcp_overlay{ background-color: rgba(0,0,0,0.75); display:none; position: fixed; top: 0; z-index: 2147483646; left:0; overflow:hidden; width: 100%; height: 100%;;}
+                .rltcp_overlayclick{ position:fixed; width:100%; height:100%; z-index:999999;}
+                .rltcp_information_cookie {opacity:0.9; z-index: 1000000; background-color: #2343e0 !important; font-size: 15px; top: 0; left: 0; clear: both; padding: 15px; position: fixed; text-align: center; width: 100%;  }
+                .rltcp_wrapper { margin: 0 auto; max-width:1150px; overflow:hidden;  }
+                .rltcp_information_cookie p { color: #dd3333 !important; font-size: 15px; margin: 0 auto; text-align: left; }
+                .rltcp_information_cookie img.rltcp_cookie{ float:left; margin-right:10px;}
+                .rltcp_information_cookie a {text-decoration: underline; }
+                .rltcp_accept { text-decoration:none !important; font-weight:bold !important; line-height:normal; font-size:14px; background-color: #6ed624 !important; border-radius: 4px; color: #000000; cursor: pointer; display: inline-block;  font-family:  "Helvetica", Helvetica, Arial, sans-serif; margin-right: 10px; padding: 5px 8px; position: relative; text-align: center; text-decoration: none; white-space: nowrap; margin-left: 30px; }
+                .rltcp_accept:hover { opacity: 0.85; }
+                .rltcp_infoestesa{  padding:5em 2em 3em 2em; border-radius:10px; width:100%; max-width:600px; height:450px; position:relative; margin:3em auto; font-size:12px; background-color:#fff; box-shadow:0 0 2px #000;}
+                .rltcp_leggio{ overflow:scroll; width:100%; height:100%; }
+                .rltcp_info { padding:5px 6px; cursor:pointer; display:inline-block; border-radius:5px; line-height:normal; font-size:14px; background-color: #dd9933 !important;  color: #FFF; font-family:  "Helvetica", Helvetica, Arial, sans-serif; text-decoration: none; }
+                .rltcp_disclaimer{ float:left; width:70%;}
+                .rltcp_azioni{ float:left; text-align:right; width:30%;}
+                .rltcp_chiudi {  background-color: #d00;  border: 2px solid #fff;  border-radius: 90px;  color: #fff;  font-size: 16px;  height: 30px;  line-height: 25px;  position: absolute;  right: -10px;  text-align: center;  top: -10px;  width: 30px;  z-index: 999;}
+                .rltcp_textcenter{ text-align:center !important;}
+                .rltcp_button_link {  background-color: #f7f7f7;  color: #000;  cursor: pointer;  display: block;  padding: 0.5em;  }
+                .rltcp_button:hover{ background-color:#000;}
+                .rltcp_continua{overflow:hidden; cursor:pointer !important; border-radius:15px; border-bottom:6px solid #393; font-size:18px !important; background-color:#6ccf0b !important; color:#fff; display:block; padding:0.5em; }
+                .rltcp_continua:hover{ opacity:0.9; color:#fff !important;}
+                .rltcp_continua img{ float:left; margin-right:5px; }
+                .rltcp_closing { background-color: #333;  border-radius: 10px 10px 0 0;  color: #fff;  margin-left: -2em;  margin-top: -5em;  max-width: 600px;  padding: 1em;  position: fixed;  width: 100%;  }
+                .rltcp_riactivation { display:block; line-height:1;  background-color: #009ed8 !important;  border-radius: 0 0 10px 10px;  color: #ffffff !important;  cursor: pointer !important;  font-size: 15px;  height: 100px;  padding: 10px 15px 0;  position: fixed;  right: 30px;  text-align: center;  top: 0;  width: 100px;  z-index: 999999999;  }
+                .rltcp_tastidecisionali{ overflow:hidden;}
+                .rltcp_tastidecisionali a{ margin-bottom:1em !important; display:block; cursor:pointer !important; line-height:1.2 !important; width:100%; max-width:440px; margin-right:1em; float:left;}
+                .rltcp_tastidecisionali .rltcp_continua{ overflow:hidden; cursor:pointer !important; border-radius:15px; border-bottom:6px solid #393; font-size:18px !important; background-color:#6ccf0b !important; color:#fff; display:block; padding:0.5em; }
+                .rltcp_tastidecisionali .rltcp_continua:hover{ opacity:0.9; color:#fff !important;}
+                .rltcp_tastidecisionali * img{ float:left; margin-right:5px; }
+                .rltcp_tastidecisionali .rltcp_button_link{ overflow:hidden; cursor:pointer !important; border-radius:15px; border-bottom:6px solid #940f0f; font-size:15px !important; background-color:#e00 !important; color:#fff; display:block; padding:0.5em; }
+                .rltcp_tastidecisionali .rltcp_button_link:hover{ background-color:#000; color:#fff !important;}
+                .rltcp_scroll_advice{ text-align:center; height:300px; line-height:300px;}
+                .rltcp_information_cookie .affiliate, .rltcp_information_cookie .affiliate a {  font-size: 11px;  padding-top: 5px;  text-align: right !important;}
+
+                @media only screen and (max-width:600px){
+                    .rltcp_disclaimer{ width:100% !important;}
+                    .rltcp_azioni{ width:100% !important; text-align:center;}
+                }
+                </style>
+                <!-- WP COOKIE PRIVACY UNLOCKED <HEAD> COOKIE SCRIPTS --><!-- WP COOKIE PRIVACY UNLOCKED <HEAD> COOKIE SCRIPTS -->
+<script async="" type="text/javascript" src="./How to Implement NCO in VHDL - Surf-VHDL_files/visit"></script><style type="text/css">.fancybox-margin{margin-right:15px;}</style><link rel="stylesheet" type="text/css" href="./How to Implement NCO in VHDL - Surf-VHDL_files/styles.css"><script charset="utf-8" src="./How to Implement NCO in VHDL - Surf-VHDL_files/button.5d16ecc02fbaf599a24dfb57ab239320.js"></script><style type="text/css" data-fbcssmodules="css:fb.css.base css:fb.css.dialog css:fb.css.iframewidget css:fb.css.customer_chat_plugin_iframe">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_dialog_advanced{border-radius:8px;padding:10px}.fb_dialog_content{background:#fff;color:#373737}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{left:5px;right:auto;top:5px}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{height:100%;left:0;margin:0;overflow:visible;position:absolute;top:-10000px;transform:none;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{background:none;height:auto;min-height:initial;min-width:initial;width:auto}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{clear:both;color:#fff;display:block;font-size:18px;padding-top:20px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .4);bottom:0;left:0;min-height:100%;position:absolute;right:0;top:0;width:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_mobile .fb_dialog_iframe{position:sticky;top:0}.fb_dialog_content .dialog_header{background:linear-gradient(from(#738aba), to(#2c4987));border-bottom:1px solid;border-color:#043b87;box-shadow:white 0 1px 1px -1px inset;color:#fff;font:bold 14px Helvetica, sans-serif;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:linear-gradient(from(#4267B2), to(#2a4887));background-clip:padding-box;border:1px solid #29487d;border-radius:3px;display:inline-block;line-height:18px;margin-top:3px;max-width:85px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{background:none;border:none;color:#fff;font:bold 12px Helvetica, sans-serif;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #4a4a4a;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f5f6f7;border:1px solid #4a4a4a;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-position:50% 50%;background-repeat:no-repeat;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}
+.fb_mpn_mobile_landing_page_slide_out{animation-duration:200ms;animation-name:fb_mpn_landing_page_slide_out;transition-timing-function:ease-in}.fb_mpn_mobile_landing_page_slide_out_from_left{animation-duration:200ms;animation-name:fb_mpn_landing_page_slide_out_from_left;transition-timing-function:ease-in}.fb_mpn_mobile_landing_page_slide_up{animation-duration:500ms;animation-name:fb_mpn_landing_page_slide_up;transition-timing-function:ease-in}.fb_mpn_mobile_bounce_in{animation-duration:300ms;animation-name:fb_mpn_bounce_in;transition-timing-function:ease-in}.fb_mpn_mobile_bounce_out{animation-duration:300ms;animation-name:fb_mpn_bounce_out;transition-timing-function:ease-in}.fb_mpn_mobile_bounce_out_v2{animation-duration:300ms;animation-name:fb_mpn_fade_out;transition-timing-function:ease-in}.fb_customer_chat_bounce_in_v2{animation-duration:300ms;animation-name:fb_bounce_in_v2;transition-timing-function:ease-in}.fb_customer_chat_bounce_in_from_left{animation-duration:300ms;animation-name:fb_bounce_in_from_left;transition-timing-function:ease-in}.fb_customer_chat_bounce_out_v2{animation-duration:300ms;animation-name:fb_bounce_out_v2;transition-timing-function:ease-in}.fb_customer_chat_bounce_out_from_left{animation-duration:300ms;animation-name:fb_bounce_out_from_left;transition-timing-function:ease-in}.fb_invisible_flow{display:inherit;height:0;overflow-x:hidden;width:0}@keyframes fb_mpn_landing_page_slide_out{0%{margin:0 12px;width:100% - 24px}60%{border-radius:18px}100%{border-radius:50%;margin:0 24px;width:60px}}@keyframes fb_mpn_landing_page_slide_out_from_left{0%{left:12px;width:100% - 24px}60%{border-radius:18px}100%{border-radius:50%;left:12px;width:60px}}@keyframes fb_mpn_landing_page_slide_up{0%{bottom:0;opacity:0}100%{bottom:24px;opacity:1}}@keyframes fb_mpn_bounce_in{0%{opacity:.5;top:100%}100%{opacity:1;top:0}}@keyframes fb_mpn_fade_out{0%{bottom:30px;opacity:1}100%{bottom:0;opacity:0}}@keyframes fb_mpn_bounce_out{0%{opacity:1;top:0}100%{opacity:.5;top:100%}}@keyframes fb_bounce_in_v2{0%{opacity:0;transform:scale(0, 0);transform-origin:bottom right}50%{transform:scale(1.03, 1.03);transform-origin:bottom right}100%{opacity:1;transform:scale(1, 1);transform-origin:bottom right}}@keyframes fb_bounce_in_from_left{0%{opacity:0;transform:scale(0, 0);transform-origin:bottom left}50%{transform:scale(1.03, 1.03);transform-origin:bottom left}100%{opacity:1;transform:scale(1, 1);transform-origin:bottom left}}@keyframes fb_bounce_out_v2{0%{opacity:1;transform:scale(1, 1);transform-origin:bottom right}100%{opacity:0;transform:scale(0, 0);transform-origin:bottom right}}@keyframes fb_bounce_out_from_left{0%{opacity:1;transform:scale(1, 1);transform-origin:bottom left}100%{opacity:0;transform:scale(0, 0);transform-origin:bottom left}}@keyframes slideInFromBottom{0%{opacity:.1;transform:translateY(100%)}100%{opacity:1;transform:translateY(0)}}@keyframes slideInFromBottomDelay{0%{opacity:0;transform:translateY(100%)}97%{opacity:0;transform:translateY(100%)}100%{opacity:1;transform:translateY(0)}}</style></head>
+
+<body class="post-template-default single single-post postid-1274 single-format-standard op-plugin"><div class="mailmunch-scrollbox mailmunch-scrollbox-17bbb58d5dc54be" style="position: fixed; bottom: -352px; right: 0px; z-index: 999999; line-height: 0px; transition: bottom 0.4s ease 0s; opacity: 1; display: block;"><iframe class="mailmunch-scrollbox-iframe mailmunch-scrollbox-iframe-17bbb58d5dc54be" title="FormebookClockFreq" frameborder="0" scrolling="no" allowtransparency="true" style="background: transparent; border: 0px; width: 100%; height: 352px; z-index: 18000; margin-bottom: 0px;" src="./How to Implement NCO in VHDL - Surf-VHDL_files/saved_resource.html"></iframe></div>
+	<a class="sr-only sr-only-focusable" href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#content">Skip to main content</a>
+<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner" style="margin-bottom: 76px;">
+		<nav class="navbar navbar-default
+		navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="row">
+					<div class="site-navigation-inner col-sm-12">
+						<div class="navbar-header">
+
+
+														<div id="logo">
+																																<a href="https://surf-vhdl.com/"><img src="./How to Implement NCO in VHDL - Surf-VHDL_files/cropped-SURFVHDL_158x76.jpg" height="76" width="156" alt="Surf-VHDL"></a>
+																																</div><!-- end of #logo -->
+
+							<button type="button" class="btn navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+
+
+
+						<div class="collapse navbar-collapse navbar-ex1-collapse"><ul id="menu-main-menu" class="nav navbar-nav"><li id="menu-item-22" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-22"><a title="Home" href="http://surf-vhdl.com/">Home</a></li>
+<li id="menu-item-1190" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1190"><a href="http://surf-vhdl.com/course">Online Courses</a></li>
+<li id="menu-item-203" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-203 dropdown"><a title="VHDL Syntax Web-Course – Surf-VHDL" href="https://surf-vhdl.com/vhdl-syntax-web-course-surf-vhdl/">VHDL Syntax</a><span class="caret sparkling-dropdown"></span>
+<ul role="menu" class=" dropdown-menu">
+	<li id="menu-item-205" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-205"><a title="VHDL Syntax Web-Course – Surf-VHDL" href="https://surf-vhdl.com/vhdl-syntax-web-course-surf-vhdl/">VHDL Syntax – Summary</a></li>
+	<li id="menu-item-97" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-97"><a title="VHDL Entity – VHDL Syntax Course" href="https://surf-vhdl.com/vhdl-syntax-web-course-surf-vhdl/vhdl-entity/">VHDL Syntax – VHDL Entity</a></li>
+	<li id="menu-item-98" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-98"><a title="VHDL Syntax Course – VHDL Entity and Architecture Pair" href="https://surf-vhdl.com/vhdl-syntax-web-course-surf-vhdl/vhdl-entity-and-architecture-pair/">VHDL Entity and Architecture Pair</a></li>
+	<li id="menu-item-99" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-99"><a title="VHDL Syntax Course – VHDL Concurrency" href="https://surf-vhdl.com/vhdl-syntax-web-course-surf-vhdl/vhdl-concurrency/">VHDL Concurrency</a></li>
+	<li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172"><a href="https://surf-vhdl.com/vhdl-syntax-web-course-surf-vhdl/vhdl-syntax-coding-style/">VHDL Syntax Coding Style</a></li>
+	<li id="menu-item-173" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-173"><a href="https://surf-vhdl.com/vhdl-syntax-web-course-surf-vhdl/vhdl-structural-modeling-style/">VHDL Structural Modeling Style</a></li>
+	<li id="menu-item-171" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-171"><a href="https://surf-vhdl.com/vhdl-syntax-web-course-surf-vhdl/vhdl-behavioral-modeling-style/">VHDL Behavioral Modeling Style</a></li>
+	<li id="menu-item-170" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-170"><a href="https://surf-vhdl.com/vhdl-syntax-web-course-surf-vhdl/vhdl-delay-type-modeling/">VHDL Delay Type Modeling</a></li>
+	<li id="menu-item-169" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-169"><a href="https://surf-vhdl.com/vhdl-syntax-web-course-surf-vhdl/vhdl-event-and-transaction/">VHDL Event and Transaction</a></li>
+	<li id="menu-item-204" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-204"><a href="https://surf-vhdl.com/vhdl-syntax-web-course-surf-vhdl/vhdl-process-statement/">VHDL Process Statement</a></li>
+	<li id="menu-item-247" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-247"><a href="https://surf-vhdl.com/vhdl-syntax-web-course-surf-vhdl/vhdl-concurrent-conditional-assignment/">VHDL Concurrent Conditional Assignment</a></li>
+	<li id="menu-item-246" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-246"><a href="https://surf-vhdl.com/vhdl-syntax-web-course-surf-vhdl/vhdl-driver-and-source-concept/">VHDL Driver and Source concept</a></li>
+	<li id="menu-item-271" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-271"><a href="https://surf-vhdl.com/vhdl-syntax-web-course-surf-vhdl/vhdl-generics/">VHDL Generics</a></li>
+	<li id="menu-item-270" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-270"><a href="https://surf-vhdl.com/vhdl-syntax-web-course-surf-vhdl/vhdl-types-of-data-object/">VHDL Types of Data object</a></li>
+</ul>
+</li>
+<li id="menu-item-892" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-892 dropdown"><a title="How to Implement a Full Adder in VHDL" href="https://surf-vhdl.com/how-to-implement-a-full-adder-in-vhdl/">VHDL Basic</a><span class="caret sparkling-dropdown"></span>
+<ul role="menu" class=" dropdown-menu">
+	<li id="menu-item-893" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-893"><a href="https://surf-vhdl.com/how-to-implement-a-full-adder-in-vhdl/">How to Implement a Full Adder in VHDL</a></li>
+</ul>
+</li>
+<li id="menu-item-21" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-21 dropdown"><a title="About Surf-VHDL" href="https://surf-vhdl.com/about-surf-vhdl/">About</a><span class="caret sparkling-dropdown"></span>
+<ul role="menu" class=" dropdown-menu">
+	<li id="menu-item-26" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-26"><a title="About us" href="https://surf-vhdl.com/about-surf-vhdl/">About  Surf-VHDL</a></li>
+	<li id="menu-item-25" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-25"><a title="Privacy &amp; Coockie" href="https://surf-vhdl.com/privacy-policy/">Privacy  Policy</a></li>
+</ul>
+</li>
+</ul></div>
+
+
+					</div>
+				</div>
+			</div>
+		</nav><!-- .site-navigation -->
+	</header><!-- #masthead -->
+
+	<div id="content" class="site-content">
+
+		<div class="top-section">
+								</div>
+
+		<div class="container main-content-area">
+						<div class="row pull-left">
+				<div class="main-content-inner col-sm-12 col-md-8">
+
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		<article id="post-1274" class="post-1274 post type-post status-publish format-standard hentry category-signal-processing category-vhdl">
+		<div class="post-inner-content">
+		<header class="entry-header page-header">
+
+			<h1 class="entry-title ">How to Implement NCO in VHDL</h1>
+
+			<div class="entry-meta">
+				<span class="posted-on"><i class="fa fa-calendar-alt"></i> <a href="https://surf-vhdl.com/how-to-implement-nco-vhdl/" rel="bookmark"><time class="entry-date published" datetime="2017-02-03T17:59:48+01:00">February 3, 2017</time><time class="updated" datetime="2017-10-07T20:26:29+01:00">October 7, 2017</time></a></span><span class="byline"> <i class="fa fa-user"></i> <span class="author vcard"><a class="url fn n" href="https://surf-vhdl.com/author/francesco/">Surf-VHDL</a></span></span>
+								<span class="cat-links"><i class="fa fa-folder-open"></i>
+				 <a href="https://surf-vhdl.com/category/signal-processing/" rel="category tag">Signal Processing</a>, <a href="https://surf-vhdl.com/category/vhdl/" rel="category tag">VHDL</a>				</span>
+								
+			</div><!-- .entry-meta -->
+		</header><!-- .entry-header -->
+
+		<div class="entry-content">
+			<div class="mailmunch-forms-before-post" style="display: none !important;"></div><h2>&nbsp;What is an NCO?</h2>
+<p>An <strong>NCO</strong> is the acronym of Numerically Controlled Oscillator.</p>
+<figure id="attachment_1277" class="thumbnail wp-caption aligncenter" style="width: 658px"><img loading="lazy" class="wp-image-1277 size-large" src="./How to Implement NCO in VHDL - Surf-VHDL_files/NCO-simple-1024x536.jpg" width="648" height="339" srcset="https://surf-vhdl.com/wp/wp-content/uploads/2017/02/NCO-simple-1024x536.jpg 1024w, https://surf-vhdl.com/wp/wp-content/uploads/2017/02/NCO-simple-300x157.jpg 300w, https://surf-vhdl.com/wp/wp-content/uploads/2017/02/NCO-simple-768x402.jpg 768w, https://surf-vhdl.com/wp/wp-content/uploads/2017/02/NCO-simple.jpg 1200w" sizes="(max-width: 648px) 100vw, 648px"><figcaption class="caption wp-caption-text">Figure 1 – NCO basic architecture <a name="Figure1"></a></figcaption></figure>
+<p>Basically, it is implemented with an accumulator which adds a constant value FCW (Frequency Control Word). The accumulator wrap around every time it reaches its maximum value. For example, if the maximum value is 15 (4-bit accumulator) and the FWC = 4, the accumulator will count:<span id="more-1274"></span></p>
+<p>0, 4, 8, 12, 1, 5, 9… and so on.</p>
+<p>The NCO is widely used in digital signal processing.&nbsp;In this post, we are going to understand how to implement an <strong>NCO</strong> in <strong>VHDL</strong>.</p>
+<p>You can check also the <a href="https://en.wikipedia.org/wiki/Numerically_controlled_oscillator">Wikipedia page relative to NCO</a> for further info relative to the math behind the NCO. Here we want to focus on then VHDL implementation of the NCO.</p>
+<p>&nbsp;</p>
+<hr>
+<h2>NCO use in digital processing</h2>
+<p>The NCO is widely used in the&nbsp;digital implementation of <strong>DDS</strong>, digital <strong>UP/Down converter</strong>, <strong>Variable clock generation</strong>, digital PLL.</p>
+<p>You can find an NCO inside a DAC such as <a href="http://www.ti.com/lit/ds/symlink/dac5687.pdf">DAC5687 Interpolated DAC</a><br>
+The DAC5687 is a dual-channel 16-bit high-speed digital-to-analog converter (DAC) with integrated 2×, 4×, and 8× interpolation filters, a complex numerically controlled oscillator (NCO), onboard clock multiplier, and Phase IQ compensation, and on-chip voltage reference. The DAC architecture is reported below. In this architecture, the NCO provides a frequency up-conversion of the input signal.</p>
+<figure id="attachment_1279" class="thumbnail wp-caption aligncenter" style="width: 658px"><img loading="lazy" class="wp-image-1279 size-large" src="./How to Implement NCO in VHDL - Surf-VHDL_files/DAC5687-1024x707.jpeg" width="648" height="447" srcset="https://surf-vhdl.com/wp/wp-content/uploads/2017/02/DAC5687-1024x707.jpeg 1024w, https://surf-vhdl.com/wp/wp-content/uploads/2017/02/DAC5687-300x207.jpeg 300w, https://surf-vhdl.com/wp/wp-content/uploads/2017/02/DAC5687-768x530.jpeg 768w, https://surf-vhdl.com/wp/wp-content/uploads/2017/02/DAC5687.jpeg 1053w" sizes="(max-width: 648px) 100vw, 648px"><figcaption class="caption wp-caption-text">Figure 2- DAC 5687 architecture <a name="Figure2"></a></figcaption></figure>
+<p>Another example is the Digital I/Q demodulator integrated into <a href="http://www.analog.com/media/en/technical-documentation/data-sheets/AD6655.pdf">ADC AD6655</a>. In this case, the NCO is used to implement a frequency down-conversion</p>
+<figure id="attachment_1281" class="thumbnail wp-caption aligncenter" style="width: 658px"><img loading="lazy" class="wp-image-1281 size-large" src="./How to Implement NCO in VHDL - Surf-VHDL_files/AD6655-1024x601.jpeg" width="648" height="380" srcset="https://surf-vhdl.com/wp/wp-content/uploads/2017/02/AD6655-1024x601.jpeg 1024w, https://surf-vhdl.com/wp/wp-content/uploads/2017/02/AD6655-300x176.jpeg 300w, https://surf-vhdl.com/wp/wp-content/uploads/2017/02/AD6655-768x451.jpeg 768w, https://surf-vhdl.com/wp/wp-content/uploads/2017/02/AD6655.jpeg 1143w" sizes="(max-width: 648px) 100vw, 648px"><figcaption class="caption wp-caption-text">Figure 3 – ADC AD 6655 <a name="Figure3"></a></figcaption></figure>
+<p>&nbsp;</p>
+<p>The NCO are also widely used inside the microcontrollers. An example is the <a href="http://microchip.wikidot.com/8bit:nco">PWM implementation in PIC microcontroller </a>&nbsp;as in <a href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#Figure4">Figure 4</a></p>
+<figure id="attachment_1282" class="thumbnail wp-caption aligncenter" style="width: 921px"><img loading="lazy" class="wp-image-1282 size-full" src="./How to Implement NCO in VHDL - Surf-VHDL_files/PIC-NCO.jpeg" width="911" height="518" srcset="https://surf-vhdl.com/wp/wp-content/uploads/2017/02/PIC-NCO.jpeg 911w, https://surf-vhdl.com/wp/wp-content/uploads/2017/02/PIC-NCO-300x171.jpeg 300w, https://surf-vhdl.com/wp/wp-content/uploads/2017/02/PIC-NCO-768x437.jpeg 768w" sizes="(max-width: 911px) 100vw, 911px"><figcaption class="caption wp-caption-text">Figure 4 – PWM implementation using NCO in PIC microcontroller<a name="Figure4"></a></figcaption></figure>
+<p>&nbsp;</p>
+<p>We can continue with other several examples of NCO usage in digital but is time to see how to implement an NCO in VHDL for our use.</p>
+<hr>
+<h2></h2>
+<h2>NCO fixed-point implementation</h2>
+<p>To implement an NCO on FPGA or ASIC we need to quantize the NCO. Generally, the number of bits used in the NCO quantization is in the range of 24-48 bit.</p>
+<p>For a 32 bit quantization, the frequency resolution of the NCO is Fc/232,</p>
+<p>where Fc is the clock frequency of the system.</p>
+<p>For example, if the clock frequency is 100 MHz the frequency resolution will be:</p>
+<pre>100.000.000/ 4.294.967.296 = 0,023 Hz</pre>
+<p>More general, the wrap-around frequency Fw is given in (Eq.1)</p>
+<pre>Fw = Fc x FCW/(2^N) (Eq.1)</pre>
+<p>Where N=number of bit of NCO</p>
+<p>Example:</p>
+<pre>If N=2^16, Fc= 100 MHz, Fw= 10 MHz
+
+FCW = 10/100 x 65536 = 6553</pre>
+<p>In this case, using a</p>
+<pre> FCW = 6553 the Fw = 100x6553/65536 = 9,9990844726562500 MHz</pre>
+<p>Or in the case of ceiling the result:</p>
+<pre>FCW = 6554 the Fw = 100x6554/65536 = 10,000610351562500 MHz</pre>
+<p>As you can see, in this case, since <strong>Eq.1</strong> doesn’t give an integer result the final NCO frequency contains an error respect to desired frequency due to the rounding or truncation of the Frequency Control Word (FCW).</p>
+<hr>
+<h2>NCO VHDL implementation</h2>
+<p>In this section, we are going to understand how to implement an <strong>NCO in VHDL</strong>.<br>
+Let’s start with a simple implementation of an 8-bit NCO.</p>
+<div class="enlighter-default enlighter-v-standard enlighter-t-classic enlighter-hover enlighter-linenumbers "><div class="enlighter-toolbar-top enlighter-toolbar"><div class="enlighter-btn enlighter-btn-raw" title="Plain text"></div><div class="enlighter-btn enlighter-btn-copy" title="Copy to clipboard"></div><div class="enlighter-btn enlighter-btn-window" title="Open code in new window"></div><div class="enlighter-btn enlighter-btn-website" title="EnlighterJS 3 Syntax Highlighter"></div></div><div class="enlighter" style=""><div class=""><div><span class="enlighter-k0">library</span><span class="enlighter-text"> </span><span class="enlighter-k9">ieee</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-k0">use</span><span class="enlighter-text"> </span><span class="enlighter-k9">ieee.std_logic_1164.all</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-k0">use</span><span class="enlighter-text"> </span><span class="enlighter-k9">ieee.numeric_std.all</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-k0">entity</span><span class="enlighter-text"> nco8 </span><span class="enlighter-k0">is</span><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-m0">port</span><span class="enlighter-text"> </span><span class="enlighter-g1">(</span><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text">  i_clk                       : </span><span class="enlighter-k0">in</span><span class="enlighter-text">  std_logic;</span></div></div><div class=""><div><span class="enlighter-text">  i_rstb                      : </span><span class="enlighter-k0">in</span><span class="enlighter-text">  std_logic;</span></div></div><div class=""><div><span class="enlighter-text">  i_sync_reset                : </span><span class="enlighter-k0">in</span><span class="enlighter-text">  std_logic;</span></div></div><div class=""><div><span class="enlighter-text">  i_fcw                       : </span><span class="enlighter-k0">in</span><span class="enlighter-text">  </span><span class="enlighter-m0">std_logic_vector</span><span class="enlighter-g1">(</span><span class="enlighter-text">7 </span><span class="enlighter-k2">downto</span><span class="enlighter-text"> 0</span><span class="enlighter-g1">)</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text">  o_nco                       : </span><span class="enlighter-k0">out</span><span class="enlighter-text"> </span><span class="enlighter-m0">std_logic_vector</span><span class="enlighter-g1">(</span><span class="enlighter-text">7 </span><span class="enlighter-k2">downto</span><span class="enlighter-text"> 0</span><span class="enlighter-g1">))</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-k1">end</span><span class="enlighter-text"> nco8;</span></div></div><div class=""><div><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-k0">architecture</span><span class="enlighter-text"> rtl </span><span class="enlighter-k0">of</span><span class="enlighter-text"> nco8 </span><span class="enlighter-k0">is</span><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-k0">signal</span><span class="enlighter-text"> r_sync_reset                : std_logic;</span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-k0">signal</span><span class="enlighter-text"> r_fcw                       : </span><span class="enlighter-m0">unsigned</span><span class="enlighter-g1">(</span><span class="enlighter-text">7 </span><span class="enlighter-k2">downto</span><span class="enlighter-text"> 0</span><span class="enlighter-g1">)</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-k0">signal</span><span class="enlighter-text"> r_nco                       : </span><span class="enlighter-m0">unsigned</span><span class="enlighter-g1">(</span><span class="enlighter-text">7 </span><span class="enlighter-k2">downto</span><span class="enlighter-text"> 0</span><span class="enlighter-g1">)</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-k1">begin</span><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text">p_nco8 : </span><span class="enlighter-m0">process</span><span class="enlighter-g1">(</span><span class="enlighter-text">i_clk,i_rstb</span><span class="enlighter-g1">)</span><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-k1">begin</span><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text">  </span><span class="enlighter-m0">if</span><span class="enlighter-g1">(</span><span class="enlighter-text">i_rstb</span><span class="enlighter-g0">=</span><span class="enlighter-s0">'0'</span><span class="enlighter-g1">)</span><span class="enlighter-text"> </span><span class="enlighter-k1">then</span><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text">    r_sync_reset      </span><span class="enlighter-g0">&lt;</span><span class="enlighter-g0">=</span><span class="enlighter-text"> </span><span class="enlighter-s0">'1'</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text">    r_fcw             </span><span class="enlighter-g0">&lt;</span><span class="enlighter-g0">=</span><span class="enlighter-text"> </span><span class="enlighter-g1">(</span><span class="enlighter-k0">others</span><span class="enlighter-g0">=</span><span class="enlighter-g0">&gt;</span><span class="enlighter-s0">'0'</span><span class="enlighter-g1">)</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text">    r_nco             </span><span class="enlighter-g0">&lt;</span><span class="enlighter-g0">=</span><span class="enlighter-text"> </span><span class="enlighter-g1">(</span><span class="enlighter-k0">others</span><span class="enlighter-g0">=</span><span class="enlighter-g0">&gt;</span><span class="enlighter-s0">'0'</span><span class="enlighter-g1">)</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text">  </span><span class="enlighter-m0">elsif</span><span class="enlighter-g1">(</span><span class="enlighter-m0">rising_edge</span><span class="enlighter-g1">(</span><span class="enlighter-text">i_clk</span><span class="enlighter-g1">))</span><span class="enlighter-text"> </span><span class="enlighter-k1">then</span><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text">    r_sync_reset      </span><span class="enlighter-g0">&lt;</span><span class="enlighter-g0">=</span><span class="enlighter-text"> i_sync_reset   ;</span></div></div><div class=""><div><span class="enlighter-text">    r_fcw             </span><span class="enlighter-g0">&lt;</span><span class="enlighter-g0">=</span><span class="enlighter-text"> </span><span class="enlighter-m0">unsigned</span><span class="enlighter-g1">(</span><span class="enlighter-text">i_fcw</span><span class="enlighter-g1">)</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text">    </span><span class="enlighter-m0">if</span><span class="enlighter-g1">(</span><span class="enlighter-text">r_sync_reset</span><span class="enlighter-g0">=</span><span class="enlighter-s0">'1'</span><span class="enlighter-g1">)</span><span class="enlighter-text"> </span><span class="enlighter-k1">then</span><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text">      r_nco             </span><span class="enlighter-g0">&lt;</span><span class="enlighter-g0">=</span><span class="enlighter-text"> </span><span class="enlighter-g1">(</span><span class="enlighter-k0">others</span><span class="enlighter-g0">=</span><span class="enlighter-g0">&gt;</span><span class="enlighter-s0">'0'</span><span class="enlighter-g1">)</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text">    </span><span class="enlighter-k1">else</span><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text">      r_nco             </span><span class="enlighter-g0">&lt;</span><span class="enlighter-g0">=</span><span class="enlighter-text"> r_nco </span><span class="enlighter-g0">+</span><span class="enlighter-text"> r_fcw;</span></div></div><div class=""><div><span class="enlighter-text">    </span><span class="enlighter-k1">end</span><span class="enlighter-text"> </span><span class="enlighter-k1">if</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text">  </span><span class="enlighter-k1">end</span><span class="enlighter-text"> </span><span class="enlighter-k1">if</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-k1">end</span><span class="enlighter-text"> </span><span class="enlighter-k0">process</span><span class="enlighter-text"> p_nco8;</span></div></div><div class=""><div><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text">o_nco            </span><span class="enlighter-g0">&lt;</span><span class="enlighter-g0">=</span><span class="enlighter-text"> </span><span class="enlighter-m0">std_logic_vector</span><span class="enlighter-g1">(</span><span class="enlighter-text">r_nco</span><span class="enlighter-g1">)</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-k1">end</span><span class="enlighter-text"> rtl;</span></div></div></div><div class="enlighter-raw">library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity nco8 is
+port (
+  i_clk                       : in  std_logic;
+  i_rstb                      : in  std_logic;
+  i_sync_reset                : in  std_logic;
+  i_fcw                       : in  std_logic_vector(7 downto 0);
+  o_nco                       : out std_logic_vector(7 downto 0));
+end nco8;
+
+architecture rtl of nco8 is
+signal r_sync_reset                : std_logic;
+signal r_fcw                       : unsigned(7 downto 0);
+signal r_nco                       : unsigned(7 downto 0);
+
+begin
+
+p_nco8 : process(i_clk,i_rstb)
+begin
+  if(i_rstb='0') then
+    r_sync_reset      &lt;= '1';
+    r_fcw             &lt;= (others=&gt;'0');
+    r_nco             &lt;= (others=&gt;'0');
+  elsif(rising_edge(i_clk)) then
+    r_sync_reset      &lt;= i_sync_reset   ;
+    r_fcw             &lt;= unsigned(i_fcw);
+    if(r_sync_reset='1') then
+      r_nco             &lt;= (others=&gt;'0');
+    else
+      r_nco             &lt;= r_nco + r_fcw;
+    end if;
+  end if;
+end process p_nco8;
+
+o_nco            &lt;= std_logic_vector(r_nco);
+
+end rtl;</div><div class="enlighter-toolbar-bottom enlighter-toolbar"></div></div><pre class="EnlighterJSRAW enlighter-origin" data-enlighter-language="vhdl">library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity nco8 is
+port (
+  i_clk                       : in  std_logic;
+  i_rstb                      : in  std_logic;
+  i_sync_reset                : in  std_logic;
+  i_fcw                       : in  std_logic_vector(7 downto 0);
+  o_nco                       : out std_logic_vector(7 downto 0));
+end nco8;
+
+architecture rtl of nco8 is
+signal r_sync_reset                : std_logic;
+signal r_fcw                       : unsigned(7 downto 0);
+signal r_nco                       : unsigned(7 downto 0);
+
+begin
+
+p_nco8 : process(i_clk,i_rstb)
+begin
+  if(i_rstb='0') then
+    r_sync_reset      &lt;= '1';
+    r_fcw             &lt;= (others=&gt;'0');
+    r_nco             &lt;= (others=&gt;'0');
+  elsif(rising_edge(i_clk)) then
+    r_sync_reset      &lt;= i_sync_reset   ;
+    r_fcw             &lt;= unsigned(i_fcw);
+    if(r_sync_reset='1') then
+      r_nco             &lt;= (others=&gt;'0');
+    else
+      r_nco             &lt;= r_nco + r_fcw;
+    end if;
+  end if;
+end process p_nco8;
+
+o_nco            &lt;= std_logic_vector(r_nco);
+
+end rtl;
+</pre>
+<p><em><strong>VHDL code of an NCO</strong></em></p>
+<hr>
+<p>The NCO VHDL code implements an accumulator that will accumulate the input <strong>FCW</strong> register when the synchronous “<em><strong>i_sync_reset</strong></em>” control signal value is zero.</p><div class="mailmunch-forms-in-post-middle" style="display: none !important;"></div>
+<p>As clear from the VHDL code, the input signals are <strong>registered</strong> using an assignment under the clocked process to have a better result in terms of static timing analysis, i.e. timing performances.</p>
+<p>If you don’t want to add the input registers you must pay attention to providing input signal already registered in the <strong>same clock domain of the NCO clock</strong>.</p>
+<p>It is very important especially for the “<em><strong>i_sync_reset</strong></em>” signal if you want to guarantee the functionality of the NCO.</p>
+<p>The use of an&nbsp;asynchronous signal, i.e. signal provided from a different clock domain, is the classical error when you design in VHDL even made from the expert designer.</p>
+<hr>
+<p>&nbsp;</p>
+<h2>NCO VHDL simulation</h2>
+<p><a href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#Figure5">Figure 5</a> shows the simulation of the VHDL code of the NCO where the Frequency Control Word (FCW) is set to 19. In this case, the 8-bit NCO wrap at 2^8 = 256. The wrapping period will be:<br>
+256/19 = 13.47 i.e. a no integer number. As clear from the figure the wrapping cycle alternates between 13 and 14 in the long term the average will be around 13.47. In the simulation, the clock cycle is set to 10 ns, so 140 ns is relative to 14 clock cycles.</p>
+<figure id="attachment_1287" class="thumbnail wp-caption aligncenter" style="width: 658px"><img loading="lazy" class="wp-image-1287 size-large" src="./How to Implement NCO in VHDL - Surf-VHDL_files/NCO-simulation-simple-1024x536.jpg" width="648" height="339" srcset="https://surf-vhdl.com/wp/wp-content/uploads/2017/02/NCO-simulation-simple-1024x536.jpg 1024w, https://surf-vhdl.com/wp/wp-content/uploads/2017/02/NCO-simulation-simple-300x157.jpg 300w, https://surf-vhdl.com/wp/wp-content/uploads/2017/02/NCO-simulation-simple-768x402.jpg 768w, https://surf-vhdl.com/wp/wp-content/uploads/2017/02/NCO-simulation-simple.jpg 1200w" sizes="(max-width: 648px) 100vw, 648px"><figcaption class="caption wp-caption-text">Figure 5 – 8-bit NCO simulation with FCW=19<a name="Figure5"></a></figcaption></figure>
+<hr>
+<p>&nbsp;</p>
+<h2>NCO VHDL implementation with start phase</h2>
+<p>When you use an NCO sometimes you need to provide an NCO start phase different from zero.</p>
+<p>For example, when you use an NCO to drive a SIN/COS table or a CORDIC to implement a trigonometric function. An example of NCO with start phase architecture is given in <a href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#Figure6">Figure 6</a>.</p>
+<p>&nbsp;</p>
+<figure id="attachment_1288" class="thumbnail wp-caption aligncenter" style="width: 658px"><img loading="lazy" class="wp-image-1288 size-large" src="./How to Implement NCO in VHDL - Surf-VHDL_files/NCO-start-phase-1024x536.jpg" width="648" height="339" srcset="https://surf-vhdl.com/wp/wp-content/uploads/2017/02/NCO-start-phase-1024x536.jpg 1024w, https://surf-vhdl.com/wp/wp-content/uploads/2017/02/NCO-start-phase-300x157.jpg 300w, https://surf-vhdl.com/wp/wp-content/uploads/2017/02/NCO-start-phase-768x402.jpg 768w, https://surf-vhdl.com/wp/wp-content/uploads/2017/02/NCO-start-phase.jpg 1200w" sizes="(max-width: 648px) 100vw, 648px"><figcaption class="caption wp-caption-text">Figure 6 – NCO with Start-Phase control<a name="Figure6"></a></figcaption></figure>
+<p>&nbsp;</p>
+<p>In this case, the start-phase value will be loaded into the NCO accumulator register when the NCO is under synchronous reset. The VHDL code for an NCO with start phase can be written as follow:</p>
+<div class="enlighter-default enlighter-v-standard enlighter-t-classic enlighter-hover enlighter-linenumbers "><div class="enlighter-toolbar-top enlighter-toolbar"><div class="enlighter-btn enlighter-btn-raw" title="Plain text"></div><div class="enlighter-btn enlighter-btn-copy" title="Copy to clipboard"></div><div class="enlighter-btn enlighter-btn-window" title="Open code in new window"></div><div class="enlighter-btn enlighter-btn-website" title="EnlighterJS 3 Syntax Highlighter"></div></div><div class="enlighter" style=""><div class=""><div><span class="enlighter-k0">library</span><span class="enlighter-text"> </span><span class="enlighter-k9">ieee</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-k0">use</span><span class="enlighter-text"> </span><span class="enlighter-k9">ieee.std_logic_1164.all</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-k0">use</span><span class="enlighter-text"> </span><span class="enlighter-k9">ieee.numeric_std.all</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-k0">entity</span><span class="enlighter-text"> nco8_phase </span><span class="enlighter-k0">is</span><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-m0">port</span><span class="enlighter-text"> </span><span class="enlighter-g1">(</span><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text">  i_clk                       : </span><span class="enlighter-k0">in</span><span class="enlighter-text">  std_logic;</span></div></div><div class=""><div><span class="enlighter-text">  i_rstb                      : </span><span class="enlighter-k0">in</span><span class="enlighter-text">  std_logic;</span></div></div><div class=""><div><span class="enlighter-text">  i_sync_reset                : </span><span class="enlighter-k0">in</span><span class="enlighter-text">  std_logic;</span></div></div><div class=""><div><span class="enlighter-text">  i_start_phase               : </span><span class="enlighter-k0">in</span><span class="enlighter-text">  </span><span class="enlighter-m0">std_logic_vector</span><span class="enlighter-g1">(</span><span class="enlighter-text">7 </span><span class="enlighter-k2">downto</span><span class="enlighter-text"> 0</span><span class="enlighter-g1">)</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text">  i_fcw                       : </span><span class="enlighter-k0">in</span><span class="enlighter-text">  </span><span class="enlighter-m0">std_logic_vector</span><span class="enlighter-g1">(</span><span class="enlighter-text">7 </span><span class="enlighter-k2">downto</span><span class="enlighter-text"> 0</span><span class="enlighter-g1">)</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text">  o_nco                       : </span><span class="enlighter-k0">out</span><span class="enlighter-text"> </span><span class="enlighter-m0">std_logic_vector</span><span class="enlighter-g1">(</span><span class="enlighter-text">7 </span><span class="enlighter-k2">downto</span><span class="enlighter-text"> 0</span><span class="enlighter-g1">))</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-k1">end</span><span class="enlighter-text"> nco8_phase;</span></div></div><div class=""><div><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-k0">architecture</span><span class="enlighter-text"> rtl </span><span class="enlighter-k0">of</span><span class="enlighter-text"> nco8_phase </span><span class="enlighter-k0">is</span><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-k0">signal</span><span class="enlighter-text"> r_sync_reset                : std_logic;</span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-k0">signal</span><span class="enlighter-text"> r_start_phase               : </span><span class="enlighter-m0">unsigned</span><span class="enlighter-g1">(</span><span class="enlighter-text">7 </span><span class="enlighter-k2">downto</span><span class="enlighter-text"> 0</span><span class="enlighter-g1">)</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-k0">signal</span><span class="enlighter-text"> r_fcw                       : </span><span class="enlighter-m0">unsigned</span><span class="enlighter-g1">(</span><span class="enlighter-text">7 </span><span class="enlighter-k2">downto</span><span class="enlighter-text"> 0</span><span class="enlighter-g1">)</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-k0">signal</span><span class="enlighter-text"> r_nco                       : </span><span class="enlighter-m0">unsigned</span><span class="enlighter-g1">(</span><span class="enlighter-text">7 </span><span class="enlighter-k2">downto</span><span class="enlighter-text"> 0</span><span class="enlighter-g1">)</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-k1">begin</span><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text">p_nco8 : </span><span class="enlighter-m0">process</span><span class="enlighter-g1">(</span><span class="enlighter-text">i_clk,i_rstb</span><span class="enlighter-g1">)</span><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-k1">begin</span><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text">  </span><span class="enlighter-m0">if</span><span class="enlighter-g1">(</span><span class="enlighter-text">i_rstb</span><span class="enlighter-g0">=</span><span class="enlighter-s0">'0'</span><span class="enlighter-g1">)</span><span class="enlighter-text"> </span><span class="enlighter-k1">then</span><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text">    r_sync_reset      </span><span class="enlighter-g0">&lt;</span><span class="enlighter-g0">=</span><span class="enlighter-text"> </span><span class="enlighter-s0">'1'</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text">    r_start_phase     </span><span class="enlighter-g0">&lt;</span><span class="enlighter-g0">=</span><span class="enlighter-text"> </span><span class="enlighter-g1">(</span><span class="enlighter-k0">others</span><span class="enlighter-g0">=</span><span class="enlighter-g0">&gt;</span><span class="enlighter-s0">'0'</span><span class="enlighter-g1">)</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text">    r_fcw             </span><span class="enlighter-g0">&lt;</span><span class="enlighter-g0">=</span><span class="enlighter-text"> </span><span class="enlighter-g1">(</span><span class="enlighter-k0">others</span><span class="enlighter-g0">=</span><span class="enlighter-g0">&gt;</span><span class="enlighter-s0">'0'</span><span class="enlighter-g1">)</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text">    r_nco             </span><span class="enlighter-g0">&lt;</span><span class="enlighter-g0">=</span><span class="enlighter-text"> </span><span class="enlighter-g1">(</span><span class="enlighter-k0">others</span><span class="enlighter-g0">=</span><span class="enlighter-g0">&gt;</span><span class="enlighter-s0">'0'</span><span class="enlighter-g1">)</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text">  </span><span class="enlighter-m0">elsif</span><span class="enlighter-g1">(</span><span class="enlighter-m0">rising_edge</span><span class="enlighter-g1">(</span><span class="enlighter-text">i_clk</span><span class="enlighter-g1">))</span><span class="enlighter-text"> </span><span class="enlighter-k1">then</span><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text">    r_sync_reset      </span><span class="enlighter-g0">&lt;</span><span class="enlighter-g0">=</span><span class="enlighter-text"> i_sync_reset   ;</span></div></div><div class=""><div><span class="enlighter-text">    r_start_phase     </span><span class="enlighter-g0">&lt;</span><span class="enlighter-g0">=</span><span class="enlighter-text"> </span><span class="enlighter-m0">unsigned</span><span class="enlighter-g1">(</span><span class="enlighter-text">i_start_phase</span><span class="enlighter-g1">)</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text">    r_fcw             </span><span class="enlighter-g0">&lt;</span><span class="enlighter-g0">=</span><span class="enlighter-text"> </span><span class="enlighter-m0">unsigned</span><span class="enlighter-g1">(</span><span class="enlighter-text">i_fcw</span><span class="enlighter-g1">)</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text">    </span><span class="enlighter-m0">if</span><span class="enlighter-g1">(</span><span class="enlighter-text">r_sync_reset</span><span class="enlighter-g0">=</span><span class="enlighter-s0">'1'</span><span class="enlighter-g1">)</span><span class="enlighter-text"> </span><span class="enlighter-k1">then</span><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text">      r_nco             </span><span class="enlighter-g0">&lt;</span><span class="enlighter-g0">=</span><span class="enlighter-text"> r_start_phase;</span></div></div><div class=""><div><span class="enlighter-text">    </span><span class="enlighter-k1">else</span><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text">      r_nco             </span><span class="enlighter-g0">&lt;</span><span class="enlighter-g0">=</span><span class="enlighter-text"> r_nco </span><span class="enlighter-g0">+</span><span class="enlighter-text"> r_fcw;</span></div></div><div class=""><div><span class="enlighter-text">    </span><span class="enlighter-k1">end</span><span class="enlighter-text"> </span><span class="enlighter-k1">if</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text">  </span><span class="enlighter-k1">end</span><span class="enlighter-text"> </span><span class="enlighter-k1">if</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-k1">end</span><span class="enlighter-text"> </span><span class="enlighter-k0">process</span><span class="enlighter-text"> p_nco8;</span></div></div><div class=""><div><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text">o_nco            </span><span class="enlighter-g0">&lt;</span><span class="enlighter-g0">=</span><span class="enlighter-text"> </span><span class="enlighter-m0">std_logic_vector</span><span class="enlighter-g1">(</span><span class="enlighter-text">r_nco</span><span class="enlighter-g1">)</span><span class="enlighter-text">;</span></div></div><div class=""><div><span class="enlighter-text"></span></div></div><div class=""><div><span class="enlighter-text"></span><span class="enlighter-k1">end</span><span class="enlighter-text"> rtl;</span></div></div></div><div class="enlighter-raw">library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity nco8_phase is
+port (
+  i_clk                       : in  std_logic;
+  i_rstb                      : in  std_logic;
+  i_sync_reset                : in  std_logic;
+  i_start_phase               : in  std_logic_vector(7 downto 0);
+  i_fcw                       : in  std_logic_vector(7 downto 0);
+  o_nco                       : out std_logic_vector(7 downto 0));
+end nco8_phase;
+
+architecture rtl of nco8_phase is
+signal r_sync_reset                : std_logic;
+signal r_start_phase               : unsigned(7 downto 0);
+signal r_fcw                       : unsigned(7 downto 0);
+signal r_nco                       : unsigned(7 downto 0);
+
+begin
+
+p_nco8 : process(i_clk,i_rstb)
+begin
+  if(i_rstb='0') then
+    r_sync_reset      &lt;= '1';
+    r_start_phase     &lt;= (others=&gt;'0');
+    r_fcw             &lt;= (others=&gt;'0');
+    r_nco             &lt;= (others=&gt;'0');
+  elsif(rising_edge(i_clk)) then
+    r_sync_reset      &lt;= i_sync_reset   ;
+    r_start_phase     &lt;= unsigned(i_start_phase);
+    r_fcw             &lt;= unsigned(i_fcw);
+    if(r_sync_reset='1') then
+      r_nco             &lt;= r_start_phase;
+    else
+      r_nco             &lt;= r_nco + r_fcw;
+    end if;
+  end if;
+end process p_nco8;
+
+o_nco            &lt;= std_logic_vector(r_nco);
+
+end rtl;</div><div class="enlighter-toolbar-bottom enlighter-toolbar"></div></div><pre class="EnlighterJSRAW enlighter-origin" data-enlighter-language="vhdl">library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity nco8_phase is
+port (
+  i_clk                       : in  std_logic;
+  i_rstb                      : in  std_logic;
+  i_sync_reset                : in  std_logic;
+  i_start_phase               : in  std_logic_vector(7 downto 0);
+  i_fcw                       : in  std_logic_vector(7 downto 0);
+  o_nco                       : out std_logic_vector(7 downto 0));
+end nco8_phase;
+
+architecture rtl of nco8_phase is
+signal r_sync_reset                : std_logic;
+signal r_start_phase               : unsigned(7 downto 0);
+signal r_fcw                       : unsigned(7 downto 0);
+signal r_nco                       : unsigned(7 downto 0);
+
+begin
+
+p_nco8 : process(i_clk,i_rstb)
+begin
+  if(i_rstb='0') then
+    r_sync_reset      &lt;= '1';
+    r_start_phase     &lt;= (others=&gt;'0');
+    r_fcw             &lt;= (others=&gt;'0');
+    r_nco             &lt;= (others=&gt;'0');
+  elsif(rising_edge(i_clk)) then
+    r_sync_reset      &lt;= i_sync_reset   ;
+    r_start_phase     &lt;= unsigned(i_start_phase);
+    r_fcw             &lt;= unsigned(i_fcw);
+    if(r_sync_reset='1') then
+      r_nco             &lt;= r_start_phase;
+    else
+      r_nco             &lt;= r_nco + r_fcw;
+    end if;
+  end if;
+end process p_nco8;
+
+o_nco            &lt;= std_logic_vector(r_nco);
+
+end rtl;
+</pre>
+<p>&nbsp;</p>
+<hr>
+<p>&nbsp;</p>
+<h2>NCO VHDL simulation with different start phase</h2>
+<p><a href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#Figure8">Figure 8</a> shows the simulation of the VHDL code of the NCO with start phase. The test bench instantiates two identical 8-bit NCO with the same Frequency Control Word (FCW) and different start phase as in <a href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#Figure7">Figure 7</a></p>
+<figure id="attachment_1289" class="thumbnail wp-caption aligncenter" style="width: 658px"><img loading="lazy" class="wp-image-1289 size-large" src="./How to Implement NCO in VHDL - Surf-VHDL_files/NCO-test-bench-1024x536.jpg" width="648" height="339" srcset="https://surf-vhdl.com/wp/wp-content/uploads/2017/02/NCO-test-bench-1024x536.jpg 1024w, https://surf-vhdl.com/wp/wp-content/uploads/2017/02/NCO-test-bench-300x157.jpg 300w, https://surf-vhdl.com/wp/wp-content/uploads/2017/02/NCO-test-bench-768x402.jpg 768w, https://surf-vhdl.com/wp/wp-content/uploads/2017/02/NCO-test-bench.jpg 1200w" sizes="(max-width: 648px) 100vw, 648px"><figcaption class="caption wp-caption-text">Figure 7 – NCO test bench with two NCO, different start phase same FCW<a name="Figure7"></a></figcaption></figure>
+<p>&nbsp;</p>
+<p>FCW= is set to 19 as the previous example, start_phase=0; start_phase2=16. As in this case, the 8-bit NCO wrap at 2^8 = 256 with a wrapping period of 256/19 = 13.47 i.e. a no integer number. So the wrapping cycle alternates between 13 and 14. The two NCOs start at the same time and due to the different start phase, the wrapping instant is different between the two NCO.</p>
+<p>&nbsp;</p>
+<figure id="attachment_1290" class="thumbnail wp-caption aligncenter" style="width: 658px"><img loading="lazy" class="wp-image-1290 size-large" src="./How to Implement NCO in VHDL - Surf-VHDL_files/NCO-simulation-phase-1024x536.jpg" width="648" height="339" srcset="https://surf-vhdl.com/wp/wp-content/uploads/2017/02/NCO-simulation-phase-1024x536.jpg 1024w, https://surf-vhdl.com/wp/wp-content/uploads/2017/02/NCO-simulation-phase-300x157.jpg 300w, https://surf-vhdl.com/wp/wp-content/uploads/2017/02/NCO-simulation-phase-768x402.jpg 768w, https://surf-vhdl.com/wp/wp-content/uploads/2017/02/NCO-simulation-phase.jpg 1200w" sizes="(max-width: 648px) 100vw, 648px"><figcaption class="caption wp-caption-text">Figure 8 – simulation of two 8-bit NCO with different start phase 0, 16 and FCW=19<a name="Figure8"></a></figcaption></figure>
+<p>&nbsp;</p>
+<hr>
+<p>&nbsp;</p>
+<hr>
+<p>&nbsp;</p>
+<p>If you appreciated this post, please help us to share it with your friend.</p>
+
+<style>
+    
+    
+                    #social-sharing-d74b6a5acfcff4f33fe90938612d6402 li{
+                        
+        text-align: center;
+        
+           /*margin-left: auto;*/
+            /*margin-right: auto;*/
+        
+    
+                    }
+                </style>
+<ul id="social-sharing-d74b6a5acfcff4f33fe90938612d6402" data-counter="false" class="social-sharing social-media-horizontal-bubble social-sharing-style-7">
+    <li><div class="fb-like fb_iframe_widget" data-href="http://surf-vhdl.com/how-to-implement-nco-vhdl" data-send="false" data-layout="box_count" data-width="450" data-show-faces="true" data-colorscheme="light" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=403471369858290&amp;color_scheme=light&amp;container_width=0&amp;href=http%3A%2F%2Fsurf-vhdl.com%2Fhow-to-implement-nco-vhdl&amp;layout=box_count&amp;locale=en_US&amp;sdk=joey&amp;send=false&amp;show_faces=true&amp;width=450"><span style="vertical-align: bottom; width: 62px; height: 40px;"><iframe name="f15471cd32788b4" width="450px" height="1000px" data-testid="fb:like Facebook Social Plugin" title="fb:like Facebook Social Plugin" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="./How to Implement NCO in VHDL - Surf-VHDL_files/like.html" style="border: none; visibility: visible; width: 62px; height: 40px;" class=""></iframe></span></div></li>
+    <li><div id="___plusone_0" style="position: absolute; width: 450px; left: -10000px;"><iframe ng-non-bindable="" frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position:absolute;top:-10000px;width:450px;margin:0px;border-style:none" tabindex="0" vspace="0" width="100%" id="I0_1630935765686" name="I0_1630935765686" src="./How to Implement NCO in VHDL - Surf-VHDL_files/fastbutton.html" data-gapiattached="true"></iframe></div><div class="g-plusone" data-size="tall" data-href="http://surf-vhdl.com/how-to-implement-nco-vhdl" data-gapiscan="true" data-onload="true" data-gapistub="true"></div></li>
+    <li><iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" class="twitter-share-button twitter-share-button-rendered twitter-tweet-button" style="position: static; visibility: visible; width: 61px; height: 20px;" title="Twitter Tweet Button" src="./How to Implement NCO in VHDL - Surf-VHDL_files/tweet_button.f88235f49a156f8b4cab34c7bc1a0acc.en.html" data-url="http://surf-vhdl.com/how-to-implement-nco-vhdl"></iframe></li>
+    <li><script src="./How to Implement NCO in VHDL - Surf-VHDL_files/in.js" type="text/javascript">lang: en_US</script><script type="IN/Share" data-url="http://surf-vhdl.com/how-to-implement-nco-vhdl" id="social-sharing-d74b6a5acfcff4f33fe90938612d6402" data-counter="top"></script></li>
+</ul>
+
+<script>
+(function ($) {
+
+    
+    if (typeof window.fbAsyncInit === 'undefined') {
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId: 403471369858290,                xfbml      : true,
+                version    : 'v2.7'
+            });
+            $(window).trigger("OptimizePress.fbAsyncInit");
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    }
+
+    if (typeof FB !== 'undefined') {
+        FB.XFBML.parse();
+    }
+
+}(opjq));
+</script>
+<!-- Twitter -->
+<script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<script>
+    /* We want to reload the button after liveeditor element gets edited */
+    if (typeof twttr === "object"
+        && typeof twttr.widgets === "object"
+        && typeof twttr.widgets.load === "function") {
+        try {
+            twttr.widgets.load();
+        } catch (e) {}
+    }
+</script>
+<!-- Google+ -->
+<script type="text/javascript">(function() { var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true; po.src = 'https://apis.google.com/js/plusone.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s); })();</script>
+<p>&nbsp;</p>
+<p>If you need to contact us, please write to: surf.vhdl@gmail.com</p>
+<p>We appreciate any of your comment, please post below:</p>
+<div class="mailmunch-forms-after-post" style="display: none !important;"></div>					</div><!-- .entry-content -->
+
+		<footer class="entry-meta">
+
+			
+		</footer><!-- .entry-meta -->
+	</div>
+
+	
+</article><!-- #post-## -->
+
+<div id="comments" class="comments-area">
+
+			<h2 class="comments-title">
+			13 thoughts to “How to Implement NCO in VHDL”		</h2>
+
+		
+		<ol class="comment-list">
+					<li id="comment-1179" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-1179" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./How to Implement NCO in VHDL - Surf-VHDL_files/a8e31a3db13bf97542240aaa4986b12c.png" srcset="https://secure.gravatar.com/avatar/a8e31a3db13bf97542240aaa4986b12c?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60" loading="lazy">						<b class="fn">Narayana Charyulu E</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-1179"><time datetime="2017-02-06T05:41:03+01:00">February 6, 2017 at 5:41 am</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>After all this, to program a FPGA you need to convert the above programs by the use of  compiler. What is the source of that compiler?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-sm btn-default" href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-1179" data-commentid="1179" data-postid="1274" data-belowelement="div-comment-1179" data-respondelement="respond" data-replyto="Reply to Narayana Charyulu E" aria-label="Reply to Narayana Charyulu E">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-1181" class="comment byuser comment-author-francesco bypostauthor odd alt depth-2">
+			<article id="div-comment-1181" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./How to Implement NCO in VHDL - Surf-VHDL_files/e5ba4adfcd363787e0d0e8f46f71dd96.png" srcset="https://secure.gravatar.com/avatar/e5ba4adfcd363787e0d0e8f46f71dd96?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60" loading="lazy">						<b class="fn">Surf-VHDL</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-1181"><time datetime="2017-02-06T19:21:30+01:00">February 6, 2017 at 7:21 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>here you can find free video courses </p>
+<p><a href="http://surf-vhdl.com/course" rel="nofollow ugc">http://surf-vhdl.com/course</a></p>
+<p>where you will find the flow starting from VHDL to the FPGA programming file</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-sm btn-default" href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-1181" data-commentid="1181" data-postid="1274" data-belowelement="div-comment-1181" data-respondelement="respond" data-replyto="Reply to Surf-VHDL" aria-label="Reply to Surf-VHDL">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-1190" class="comment even thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-1190" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./How to Implement NCO in VHDL - Surf-VHDL_files/afd6d5ced2d03d79c17cf7ba4ec88a6f.png" srcset="https://secure.gravatar.com/avatar/afd6d5ced2d03d79c17cf7ba4ec88a6f?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60" loading="lazy">						<b class="fn">Robert</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-1190"><time datetime="2017-02-08T00:30:17+01:00">February 8, 2017 at 12:30 am</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Simple way to create a digitally controlled variable oscillator! Interesting circuit!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-sm btn-default" href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-1190" data-commentid="1190" data-postid="1274" data-belowelement="div-comment-1190" data-respondelement="respond" data-replyto="Reply to Robert" aria-label="Reply to Robert">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-1210" class="comment byuser comment-author-francesco bypostauthor odd alt depth-2">
+			<article id="div-comment-1210" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./How to Implement NCO in VHDL - Surf-VHDL_files/e5ba4adfcd363787e0d0e8f46f71dd96.png" srcset="https://secure.gravatar.com/avatar/e5ba4adfcd363787e0d0e8f46f71dd96?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60" loading="lazy">						<b class="fn">Surf-VHDL</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-1210"><time datetime="2017-02-09T22:35:26+01:00">February 9, 2017 at 10:35 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thank You! <img draggable="false" role="img" class="emoji" alt="🙂" src="./How to Implement NCO in VHDL - Surf-VHDL_files/1f642.svg"></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-sm btn-default" href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-1210" data-commentid="1210" data-postid="1274" data-belowelement="div-comment-1210" data-respondelement="respond" data-replyto="Reply to Surf-VHDL" aria-label="Reply to Surf-VHDL">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-1197" class="comment even thread-even depth-1">
+			<article id="div-comment-1197" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./How to Implement NCO in VHDL - Surf-VHDL_files/c2023523979aaaf2e81155bd92c7814b.png" srcset="https://secure.gravatar.com/avatar/c2023523979aaaf2e81155bd92c7814b?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60" loading="lazy">						<b class="fn"><a href="http://redwoodeda.com/" rel="external nofollow ugc" class="url">Steve Hoover</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-1197"><time datetime="2017-02-08T16:36:13+01:00">February 8, 2017 at 4:36 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>An equivalent version you can play with in TL-Verilog: <a href="http://makerchip.com/sandbox/0YEfLfv/0Y6hLB" rel="nofollow ugc">http://makerchip.com/sandbox/0YEfLfv/0Y6hLB</a><br>
+Essentially it’s this one-liner:<br>
+$Nco[7:0] &lt;= $reset ? $start_phase[7:0] : $Nco + $fcw[7:0];</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-sm btn-default" href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-1197" data-commentid="1197" data-postid="1274" data-belowelement="div-comment-1197" data-respondelement="respond" data-replyto="Reply to Steve Hoover" aria-label="Reply to Steve Hoover">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+		<li id="comment-1233" class="comment odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-1233" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./How to Implement NCO in VHDL - Surf-VHDL_files/b1905044f3d0e74bdbaceea7cec4dfef.png" srcset="https://secure.gravatar.com/avatar/b1905044f3d0e74bdbaceea7cec4dfef?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60" loading="lazy">						<b class="fn">Omar</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-1233"><time datetime="2017-02-13T21:10:39+01:00">February 13, 2017 at 9:10 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>The NCO code does not show how the “wrap around” operation happens to generate the sequence<br>
+0,4,8,12,1,5,9,…</p>
+<p>The way I see it, it will produce 0,4,8,12,9,4,… etc</p>
+<p>Am I missing something here?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-sm btn-default" href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-1233" data-commentid="1233" data-postid="1274" data-belowelement="div-comment-1233" data-respondelement="respond" data-replyto="Reply to Omar" aria-label="Reply to Omar">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+		<li id="comment-1234" class="comment even thread-even depth-1">
+			<article id="div-comment-1234" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./How to Implement NCO in VHDL - Surf-VHDL_files/b1905044f3d0e74bdbaceea7cec4dfef.png" srcset="https://secure.gravatar.com/avatar/b1905044f3d0e74bdbaceea7cec4dfef?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60" loading="lazy">						<b class="fn">Omar</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-1234"><time datetime="2017-02-13T21:19:50+01:00">February 13, 2017 at 9:19 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Sorry, I meant the way it is currently written the accumulator will periodically cycle like this:</p>
+<p>0,4,8,12,0,4,8,…</p>
+<p>NOT 0,4,8,12,1,5,… etc</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-sm btn-default" href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-1234" data-commentid="1234" data-postid="1274" data-belowelement="div-comment-1234" data-respondelement="respond" data-replyto="Reply to Omar" aria-label="Reply to Omar">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+		<li id="comment-1646" class="comment odd alt thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-1646" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./How to Implement NCO in VHDL - Surf-VHDL_files/none.png" srcset="https://secure.gravatar.com/avatar/?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo avatar-default" height="60" width="60" loading="lazy">						<b class="fn">Anonymous</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-1646"><time datetime="2017-05-17T22:48:27+01:00">May 17, 2017 at 10:48 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hi,<br>
+First off, this is very interesting post to explain the basic.<br>
+It’s appreciated!</p>
+<p>Secondly, any chance you could post your test bench for this code, the one I write is giving me different results and I cannot see why.</p>
+<p>Thanks and keep up the good work!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-sm btn-default" href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-1646" data-commentid="1646" data-postid="1274" data-belowelement="div-comment-1646" data-respondelement="respond" data-replyto="Reply to " aria-label="Reply to ">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-1654" class="comment byuser comment-author-francesco bypostauthor even depth-2 parent">
+			<article id="div-comment-1654" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./How to Implement NCO in VHDL - Surf-VHDL_files/e5ba4adfcd363787e0d0e8f46f71dd96.png" srcset="https://secure.gravatar.com/avatar/e5ba4adfcd363787e0d0e8f46f71dd96?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60" loading="lazy">						<b class="fn">Surf-VHDL</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-1654"><time datetime="2017-05-18T20:43:22+01:00">May 18, 2017 at 8:43 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hi, thank you for your feedback.<br>
+Join-us signing up and you will be updated with the VHLD of NCO and more<br>
+Cheers!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-sm btn-default" href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-1654" data-commentid="1654" data-postid="1274" data-belowelement="div-comment-1654" data-respondelement="respond" data-replyto="Reply to Surf-VHDL" aria-label="Reply to Surf-VHDL">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-10649" class="comment odd alt depth-3">
+			<article id="div-comment-10649" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./How to Implement NCO in VHDL - Surf-VHDL_files/fd29d34e92f24ad667efde612e8b3e3e.png" srcset="https://secure.gravatar.com/avatar/fd29d34e92f24ad667efde612e8b3e3e?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60" loading="lazy">						<b class="fn">unknown</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-10649"><time datetime="2019-06-05T16:10:02+01:00">June 5, 2019 at 4:10 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hi, Thank you for the useful material. I have joined your telegram channel but I have not found the test bench for NCO there.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-sm btn-default" href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-10649" data-commentid="10649" data-postid="1274" data-belowelement="div-comment-10649" data-respondelement="respond" data-replyto="Reply to unknown" aria-label="Reply to unknown">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-10571" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-10571" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./How to Implement NCO in VHDL - Surf-VHDL_files/55207c5e06d136f3b7e0d1b4b769a132.png" srcset="https://secure.gravatar.com/avatar/55207c5e06d136f3b7e0d1b4b769a132?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60" loading="lazy">						<b class="fn">mohaamd alahyary</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-10571"><time datetime="2019-03-18T20:13:19+01:00">March 18, 2019 at 8:13 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>That great ,nice</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-sm btn-default" href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-10571" data-commentid="10571" data-postid="1274" data-belowelement="div-comment-10571" data-respondelement="respond" data-replyto="Reply to mohaamd alahyary" aria-label="Reply to mohaamd alahyary">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-10575" class="comment byuser comment-author-francesco bypostauthor odd alt depth-2">
+			<article id="div-comment-10575" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./How to Implement NCO in VHDL - Surf-VHDL_files/e5ba4adfcd363787e0d0e8f46f71dd96.png" srcset="https://secure.gravatar.com/avatar/e5ba4adfcd363787e0d0e8f46f71dd96?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60" loading="lazy">						<b class="fn">Surf-VHDL</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-10575"><time datetime="2019-03-22T22:51:03+01:00">March 22, 2019 at 10:51 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thank you!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-sm btn-default" href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-10575" data-commentid="10575" data-postid="1274" data-belowelement="div-comment-10575" data-respondelement="respond" data-replyto="Reply to Surf-VHDL" aria-label="Reply to Surf-VHDL">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-10650" class="comment even thread-odd thread-alt depth-1">
+			<article id="div-comment-10650" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./How to Implement NCO in VHDL - Surf-VHDL_files/c270260e02319223ab6e3f58bc389088.png" srcset="https://secure.gravatar.com/avatar/c270260e02319223ab6e3f58bc389088?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60" loading="lazy">						<b class="fn">Adama</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-10650"><time datetime="2019-06-10T19:59:08+01:00">June 10, 2019 at 7:59 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hello here,<br>
+I think everyone is going fine.</p>
+<p>I have used this code , it can generate the sample of sine wave , but I can not view my simulation wave sine  like this poster.</p>
+<p>Maybe I have not used the same software for my simulation (because me I am using  Isim from Xilinx ISE 14.7) </p>
+<p>And I have learned a lof of thing to understanding this program, thank for all !!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link btn btn-sm btn-default" href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#comment-10650" data-commentid="10650" data-postid="1274" data-belowelement="div-comment-10650" data-respondelement="respond" data-replyto="Reply to Adama" aria-label="Reply to Adama">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+			<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://surf-vhdl.com/how-to-implement-nco-vhdl/#respond" style="display:none;">Cancel reply</a></small></h3><form action="https://surf-vhdl.com/wp/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate=""><p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required="required"></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required="required"></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200"></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit btn btn-default" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="1274" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><!-- Anti-spam plugin wordpress.org/plugins/anti-spam/ --><div class="wantispam-required-fields wantispam-form-processed"><input type="hidden" name="wantispam_t" class="wantispam-control wantispam-control-t" value="1630935764"><div class="wantispam-group wantispam-group-q" style="clear: both; display: none;">
+					<label>Current ye@r <span class="required">*</span></label>
+					<input type="hidden" name="wantispam_a" class="wantispam-control wantispam-control-a" value="2021">
+					<input type="text" name="wantispam_q" class="wantispam-control wantispam-control-q" value="7.2.7" autocomplete="off">
+				  </div>
+<div class="wantispam-group wantispam-group-e" style="display: none;">
+					<label>Leave this field empty</label>
+					<input type="text" name="wantispam_e_email_url_website" class="wantispam-control wantispam-control-e" value="" autocomplete="off">
+				  </div>
+<input type="hidden" name="wantispam_d" class="wantispam-control wantispam-control-d" value="2021"></div><!--\End Anti-spam plugin --></form>	</div><!-- #respond -->
+	
+</div><!-- #comments -->
+
+	<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://surf-vhdl.com/how-to-implement-pipeline-multiplier-vhdl/" rel="prev"><i class="fa fa-chevron-left"></i> <span class="post-title">How to Implement a Pipeline Multiplier in VHDL</span></a></div><div class="nav-next"><a href="https://surf-vhdl.com/how-to-implement-sinusoidal-dds-vhdl/" rel="next"><span class="post-title">How to Implement a sinusoidal DDS in VHDL <i class="fa fa-chevron-right"></i></span></a></div></div>
+	</nav>
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+</div><!-- close .main-content-inner -->
+<div id="secondary" class="widget-area col-sm-12 col-md-4" role="complementary">
+	<div class="well">
+				<aside id="text-5" class="widget widget_text"><h3 class="widget-title">Online Courses</h3>			<div class="textwidget"><p><a href="http://surf-vhdl.teachable.com/" target="_blank" rel="noopener"><img loading="lazy" class="aligncenter wp-image-1938 size-full" src="./How to Implement NCO in VHDL - Surf-VHDL_files/online-course-image.jpg" alt="" width="1032" height="581" srcset="https://surf-vhdl.com/wp/wp-content/uploads/2019/05/online-course-image.jpg 1032w, https://surf-vhdl.com/wp/wp-content/uploads/2019/05/online-course-image-300x169.jpg 300w, https://surf-vhdl.com/wp/wp-content/uploads/2019/05/online-course-image-768x432.jpg 768w, https://surf-vhdl.com/wp/wp-content/uploads/2019/05/online-course-image-1024x576.jpg 1024w" sizes="(max-width: 1032px) 100vw, 1032px"></a></p>
+<p><a href="http://surf-vhdl.teachable.com/" target="_blank" rel="noopener">Go to VHDL online courses</a></p>
+</div>
+		</aside><aside id="custom_html-3" class="widget_text widget widget_custom_html"><h3 class="widget-title">Listen to 5 minute VHDL podcast</h3><div class="textwidget custom-html-widget"><iframe src="./How to Implement NCO in VHDL - Surf-VHDL_files/player.html" width="100%" height="350px" frameborder="0" class="spreaker-player" id="spreaker-player-405055"></iframe>
+<script async="" src="./How to Implement NCO in VHDL - Surf-VHDL_files/widgets(1).js"></script></div></aside><aside id="search-2" class="widget widget_search">
+<form role="search" method="get" class="form-search" action="https://surf-vhdl.com/">
+  <div class="input-group">
+	  <label class="screen-reader-text" for="s">Search for:</label>
+	<input type="text" class="form-control search-query" placeholder="Search…" value="" name="s" title="Search for:">
+	<span class="input-group-btn">
+	  <button type="submit" class="btn btn-default" name="submit" id="searchsubmit" value="Search"><span class="glyphicon glyphicon-search"></span></button>
+	</span>
+  </div>
+</form>
+</aside><aside id="text-6" class="widget widget_text"><h3 class="widget-title">Student having success with VHDL</h3>			<div class="textwidget"><figure id="attachment_1791" class="thumbnail wp-caption aligncenter" style="width: 250px"><a href="https://surf-vhdl.com/student-having-success-with-vhdl/" target="_blank" rel="noopener"><img loading="lazy" class="wp-image-1791 size-full" src="./How to Implement NCO in VHDL - Surf-VHDL_files/testimonial.png" alt="" width="240" height="240" srcset="https://surf-vhdl.com/wp/wp-content/uploads/2018/10/testimonial.png 240w, https://surf-vhdl.com/wp/wp-content/uploads/2018/10/testimonial-150x150.png 150w, https://surf-vhdl.com/wp/wp-content/uploads/2018/10/testimonial-60x60.png 60w" sizes="(max-width: 240px) 100vw, 240px"></a><figcaption class="caption wp-caption-text">Click here to read what other guys think about Surf-VHDL</figcaption></figure>
+</div>
+		</aside><aside id="text-4" class="widget widget_text">			<div class="textwidget"><span style="color: #000000;"><strong>Join Telegram Channel Closed Group</strong></span>
+
+
+&nbsp;
+<hr>
+&nbsp;
+
+<a href="https://telegram.me/SurfVhdl" target="_blank" rel="noopener"><img class="aligncenter wp-image-1224 size-full" src="./How to Implement NCO in VHDL - Surf-VHDL_files/Telegram_logo.jpg" width="100" height="100"></a>
+
+<hr>
+&nbsp;
+
+https://telegram.me/SurfVhdl
+
+&nbsp;
+<hr>
+&nbsp;
+
+</div>
+		</aside><aside id="categories-2" class="widget widget_categories"><h3 class="widget-title">Categories</h3><form action="https://surf-vhdl.com/" method="get"><label class="screen-reader-text" for="cat">Categories</label><select name="cat" id="cat" class="postform form-control">
+	<option value="-1">Select Category</option>
+	<option class="level-0" value="10">Hardware Structure</option>
+	<option class="level-0" value="9">Signal Processing</option>
+	<option class="level-0" value="7">VHDL</option>
+</select>
+</form>
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "cat" );
+	function onCatChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value > 0 ) {
+			dropdown.parentNode.submit();
+		}
+	}
+	dropdown.onchange = onCatChange;
+})();
+/* ]]> */
+</script>
+
+			</aside>	</div>
+</div><!-- #secondary -->
+		</div><!-- close .row -->
+	</div><!-- close .container -->
+</div><!-- close .site-content -->
+
+	<div id="footer-area">
+		<div class="container footer-inner">
+			<div class="row">
+				
+				</div>
+		</div>
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+			<div class="site-info container">
+				<div class="row">
+										<nav role="navigation" class="col-md-6">
+											</nav>
+					<div class="copyright col-md-6">
+						<a href="https://surf-vhdl.com/%E2%80%9C" title="Surf-VHDL">Surf-VHDL</a>  All rights reserved.						Theme by <a href="http://colorlib.com/" target="_blank" rel="nofollow noopener">Colorlib</a> Powered by <a href="http://wordpress.org/" target="_blank">WordPress</a>					</div>
+				</div>
+			</div><!-- .site-info -->
+			<div class="scroll-to-top" style="display: none;"><i class="fa fa-angle-up"></i></div><!-- .scroll-to-top -->
+		</footer><!-- #colophon -->
+	</div>
+</div><!-- #page -->
+
+		<script type="text/javascript">
+		  jQuery(document).ready(function ($) {
+			if ($(window).width() >= 767) {
+			  $('.navbar-nav > li.menu-item > a').click(function () {
+				if ($(this).attr('target') !== '_blank') {
+				  window.location = $(this).attr('href')
+				}
+			  })
+			}
+		  })
+		</script>
+	<script type="text/javascript">
+	var trackcmp_email = '';
+	var trackcmp = document.createElement("script");
+	trackcmp.async = true;
+	trackcmp.type = 'text/javascript';
+	trackcmp.src = '//trackcmp.net/visit?actid=25163560&e='+encodeURIComponent(trackcmp_email)+'&r='+encodeURIComponent(document.referrer)+'&u='+encodeURIComponent(window.location.href);
+	var trackcmp_s = document.getElementsByTagName("script");
+	if (trackcmp_s.length) {
+		trackcmp_s[0].parentNode.appendChild(trackcmp);
+	} else {
+		var trackcmp_h = document.getElementsByTagName("head");
+		trackcmp_h.length && trackcmp_h[0].appendChild(trackcmp);
+	}
+</script><script type="text/javascript" id="site_tracking-js-extra">
+/* <![CDATA[ */
+var php_data = {"ac_settings":{"tracking_actid":25163560,"site_tracking_default":1},"user_email":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./How to Implement NCO in VHDL - Surf-VHDL_files/site_tracking.js" id="site_tracking-js"></script>
+<script type="text/javascript" src="./How to Implement NCO in VHDL - Surf-VHDL_files/anti-spam.js" id="anti-spam-script-js"></script>
+<script type="text/javascript" src="./How to Implement NCO in VHDL - Surf-VHDL_files/skip-link-focus-fix.min.js" id="sparkling-skip-link-focus-fix-js"></script>
+<script type="text/javascript" src="./How to Implement NCO in VHDL - Surf-VHDL_files/comment-reply.min.js" id="comment-reply-js"></script>
+<script type="text/javascript" src="./How to Implement NCO in VHDL - Surf-VHDL_files/enlighterjs.min.js" id="enlighterjs-js"></script>
+<script type="text/javascript" id="enlighterjs-js-after">
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":2,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"classic","language":"generic","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
+<script type="text/javascript" src="./How to Implement NCO in VHDL - Surf-VHDL_files/wp-embed.min.js" id="wp-embed-js"></script>
+<script type="text/javascript" src="./How to Implement NCO in VHDL - Surf-VHDL_files/op-front-all.min.js" id="optimizepress-op-front-all-js"></script>
+
+		<script type="text/javascript">
+			jQuery(document) . ready(function () {
+					jQuery . ajax( {
+								url  : "https://surf-vhdl.com/wp/wp-admin/admin-ajax.php",
+								type : "POST",
+								data : {
+										action : "request_rltcp_cookie_alert",
+										idp : "1274",
+										metablock : ""
+								},
+								success: function (data) {
+										jQuery("body").prepend(data);
+								 },
+								error: function (xhrRequest, status, errorMessage)  {
+									alert("Errore dal server. Status: " + status);
+								}
+					 });
+			 });
+        </script>
+        
+    <!-- WP COOKIE PRIVACY UNLOCKED <BODY> COOKIE SCRIPTS --><!-- WP COOKIE PRIVACY UNLOCKED <BODY> COOKIE SCRIPTS -->
+
+
+<iframe scrolling="no" frameborder="0" allowtransparency="true" src="./How to Implement NCO in VHDL - Surf-VHDL_files/widget_iframe.f88235f49a156f8b4cab34c7bc1a0acc.html" title="Twitter settings iframe" style="display: none;"></iframe><iframe name="oauth2relay830904411" id="oauth2relay830904411" src="./How to Implement NCO in VHDL - Surf-VHDL_files/postmessageRelay.html" tabindex="-1" aria-hidden="true" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe><div class="mailmunch-overlay" id="mailmunch-overlay-17bbb58d60e14e03" style="display: none; background: rgba(0, 0, 0, 0.7);"></div><div class="mailmunch-popover" id="mailmunch-popover-17bbb58d60e14e03" style="position: fixed; left: 0px; top: 0px; display: none;"><div class="mailmunch-popover-container" id="mailmunch-popover-container-17bbb58d60e14e03"><div class="mailmunch-inner-overlay" id="mailmunch-inner-overlay-17bbb58d60e14e03"></div><div class="mailmunch-popover-content" style="max-width: 500px;"><div class="mailmunch-popover-iframe-scaler" style="padding-top: 309px;"><iframe id="mailmunch-popover-frame-17bbb58d60e14e03" title="PopOverebookClockFreq" class="mailmunch-popover-iframe" frameborder="0" scrolling="no" allowtransparency="true" style="height: 309px;" src="./How to Implement NCO in VHDL - Surf-VHDL_files/saved_resource(1).html"></iframe></div></div></div></div><div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div></div></div></div><img src="./How to Implement NCO in VHDL - Surf-VHDL_files/saved_resource" width="1" height="1" style="display: none;"><iframe id="rufous-sandbox" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" style="position: absolute; visibility: hidden; display: none; width: 0px; height: 0px; padding: 0px; border: none;" title="Twitter analytics iframe" src="./How to Implement NCO in VHDL - Surf-VHDL_files/saved_resource(2).html"></iframe></body></html>

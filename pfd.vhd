@@ -19,7 +19,7 @@ use ieee.std_logic_1164.all;
 
 entity pfd is 
 	port (
-		a :  			in  std_logic; -- 
+		a :  			in  std_logic;
 		b :  			in  std_logic;
 		out_up : 	out  std_logic;
 		out_down :  out  std_logic);
@@ -48,7 +48,7 @@ begin
 
 	-- map ports of component to signals
 	d_ff_1_map_ports : d_ff
-	port map(clk => A,
+	port map(clk => a,
 			 d => sd,
 			 rst => srst,
 			 q => sup);
@@ -59,10 +59,10 @@ begin
 
 	-- map ports of component to signals
 	d_ff_2_map_ports : d_ff
-	port map(clk => B,
+	port map(clk => b,
 			 d => sd,
 			 rst => srst,
 			 q => sdown);
 
 
-END pfd_arch;
+end pfd_arch;

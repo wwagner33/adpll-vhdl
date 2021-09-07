@@ -1,5 +1,13 @@
--- Code from:
--- https://vhdlguru.blogspot.com/2010/03/simple-sine-wave-generator-in-vhdl.html
+-- ****************************************************
+-- Program: sine_wave_gen.vhd
+-- Description: Sine Wave Generator
+-- Input: clk - reference clock from DivFreq circuit output 
+-- Output: dataout - 
+--
+-- Author: Wellington W. F. Sarmento, Paulo de T. C. Pequeno e Rodrigo Ciarlini
+-- Date: 24/05/2021
+-- State: tested
+-- ****************************************************
 
 library ieee;
 use ieee.std_logic_1164.all;
