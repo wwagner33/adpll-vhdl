@@ -1,0 +1,60 @@
+
+<!-- saved from url=(0087)http://www.ece.ualberta.ca/~elliott/ee552/studentAppNotes/1999f/DigitalPhaseLockedLoop/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<meta name="Generator" content="Microsoft Word 97">
+<title>Phase Locked Loop</title>
+<meta name="Template" content="D:\microsoft office\Office\html.dot">
+<script data-dapp-detection="">!function(){let e=!1;function n(){if(!e){const n=document.createElement("meta");n.name="dapp-detected",document.head.appendChild(n),e=!0}}if(window.hasOwnProperty("ethereum")){if(window.__disableDappDetectionInsertion=!0,void 0===window.ethereum)return;n()}else{var t=window.ethereum;Object.defineProperty(window,"ethereum",{configurable:!0,enumerable:!1,set:function(e){window.__disableDappDetectionInsertion||n(),t=e},get:function(){if(!window.__disableDappDetectionInsertion){const e=arguments.callee;e&&e.caller&&e.caller.toString&&-1!==e.caller.toString().indexOf("getOwnPropertyNames")||n()}return t}})}}();</script></head>
+<body link="#0000ff" vlink="#800080">
+
+<font size="6" color="Black" face="Times New Roman" id="beginning"><center>Phase-Locked
+Loops</center></font><br>
+<i><font size="4"><p align="CENTER">Authors: Henry Young, Alex Tong, Ahmed Allam</p>
+</font></i><p><br>
+<br>
+<a href="http://www.ece.ualberta.ca/~elliott/ee552/studentAppNotes/1999f/DigitalPhaseLockedLoop/code.html">Implementation of phase-locked loops</a><br>
+<br>
+<b><font size="5">1. Introduction</font></b> </p>
+<p>Phase-locked loops (PLL's) are finding significantly increase usage in signal processing and digital systems. FM demodulation, FSK demodulation, tone decoding, frequency multiplication, signal conditioning, clock synchronization, and frequency synthesis are some of the main applications of the PLL. This application note describes the implementation of a digital phase-locked loop. <br>
+<br>
+<b><font size="5">2. Review of PLL fundamentals</font></b></p><b><font size="5">
+</font></b><p>The basic phase-locked system is shown on Fig. 1; it consists of three parts: phase comparator, low pass filter, and a voltage-controlled oscillator. These three parts are connected to form a closed-loop frequency feedback system. With no frequency applied to the PLL system, the error voltage at the output of the phase detector is zero. The voltage Vd(t), from the low-pass filter is also zero, which causes the VCO to operate at a set frequency f0 called the center frequency. When an input signal is applied to the PLL, the phase comparator compares the phase and frequency of the signal input with the VCO frequency and generates an error voltage proportional to the phase and frequency difference of the input signal and the VCO. The error voltage Ve(t), is filtered and applied to the control input of the VCO; Vd(t) varies in a direction that reduces the frequency difference between the VCO and signal-input frequency. When the input frequency is sufficiently close to the VCO frequency, the closed-loop nature of the PLL forces the VCO to lock in frequency with the signal input; i.e., when the PLL is in lock, the VCO frequency is identical to the signal input except for a finite phase difference. The range of frequencies over which the PLL can maintain this locked condition is called the lock range of the system. The lock range is always larger than the band of frequencies over which the PLL can acquire a locked condition with the signal input. This latter band of frequencies is defined as the capture range of the PLL system [1]. </p>
+<p><img src="./Phase Locked Loop_files/pll.gif" width="560" height="300"><br>
+<b><font size="5">3. The digital phase locked loop</font></b></p><b><font size="5">
+</font></b><p>To realize a digital phase-locked loop, all function blocks of the system must be implemented by purely digital circuits. There are almost an unlimited number of purely digital function blocks for the digital phase-locked loop [2], in this application note we concentrate on the most frequently used blocks. The phase detector can be implemented as an xor gate. As shown in Fig. 2, the loop filter and the VCO can be implemented by the k counter and the increment/decrement circuits, respectively. The basic digital phase-locked loop consists of four element [2], a phase detector, a K-counter, an increment/decrement circuit, and a divide-by-N counter. Two external clocks must be provided to the DPLL, a K- clock and an I/D-clock. However, in many DPLL applications, the two clocks may be common. </p>
+<p><img src="./Phase Locked Loop_files/first_orderpll.gif" width="529" height="280"></p>
+<p>The phase detector compares the phase of the incoming signal, fin, with the phase of the signal produced by the DPLL, fout, and outputs an error signal proportional to the phase difference (fin - fout).
+<br>
+<br>
+The K-counter works together with I/D circuit to produce a signal, which is fed back through the divide-by-N counter to the phase detector to be compared with the incoming signal. The K- counter consists of an up-counter, and a down-counter with respective carry and borrow outputs. The D/U input to the K-counter controls which half of the counter (up or down) is in operation. The carry and borrow outputs of the K-counter are internally connected to the increment and decrement inputs of the I/D circuit, respectively. A pulse to the decrement input causes one half-cycle to be deleted from the I/D output, while a pulse to the increment input would result in a half cycle being added to the I/D output. The I/D circuit produces an output frequency equal to one-half I/D clock when no increment or decrement is in progress. An example of basic DPLL operation is as follows: if the inputs, fin and fout, to the phase detector are such that the phase detector output is low, then the "up" portion of the K- counter operates, eventually producing a carry pulse. This carry pulse is fed to the increment input of the I/D circuit causing one half cycle to be added to the I/D output. Similarly, a high at the phase detector output enables the " down" portion of the K-counter, eventually producing a borrow pulse to the decrement input which deletes one half cycle from the I/D output. The DPLL continually adjusts the phase of fout in this fashion so that in a lock condition a definite phase difference will exist between fin and fout. The following equation describe the parameters of the DPLL [2]:<br>
+<br>
+fc = I/ D Clock/2 N Hz (1) <br>
+M = 2N (2) <br>
+M = 4K For xor phase detector 2K For J-K flip flop phase detector (3) </p>
+<p>Tracking frequency range = M fc/2KN Hz   (4) <br>
+<br>
+Where fc is the free running frequency of the DPLL when no input is applied, K is the modulus of the K counter and N is the modulus of the N counter. M determines the operating frequency of the K counter. <br>
+The minimum N to be used to eliminate ripples at the output is given by :<br>
+<br>
+Nmin = 2M/K  (5)<br>
+<br>
+The digital phase locked loop presented in this application note has K= 8, N = 8 and M = 16. This loop was tested
+with a  clock = 25 MHZ. The center frequency is 786 Khz. The lock BW is from 689 Khz to 909 KHz. From 763khz to 806
+khz the lock is weak.The lock can be improved by utilizing a  ripple cancellation circuit as described in reference
+[3]. The lock
+can also be improved by increasing the modulus of the  K counter. However, the bandwidth will be  reduced.</p> <br>
+<b><font size="5"></font></b><font size="5"></font><p><font size="5"><b>4. References</b></font><br><br>
+[1] Texas Instruments, COS/MOS Phase-Locked Loop<br>
+<a href="http://www.ti.com/sc/docs/psheets/abstract/apps/scha002.htm">http://www.ti.com/sc/docs/psheets/abstract/apps/scha002.htm</a><br>
+<br>
+[2] Texas Instruments, R. E. Best ., "Phase locked loop: Design, Simulation and application," McGraw Hill <br>
+<br>
+[3] Digital phase- locked loop design using SN54/74LS297 <a href="http://www.ti.com/sc/docs/products/logic/sn74ls297.html#Datasheets">http://www.ti.com/sc/docs/products/logic/sn74ls297.html#Datasheets</a><br>
+<br>
+[4] T. Aytur, J. Gebis, J. Golbus, B. Gribstad, C. W. Lee, J. Tuan <br>
+<a href="http://iram.cs.berkeley.edu/serialio/cs254/dll.html">http://iram.cs.berkeley.edu/serialio/cs254/dll.html</a> </p>
+<a href="http://www.ece.ualberta.ca/~elliott/ee552/studentAppNotes/1999f/DigitalPhaseLockedLoop/#beginning">Back to the top</a><br><br>
+
+
+</body></html>

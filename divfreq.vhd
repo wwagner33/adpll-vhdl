@@ -30,7 +30,7 @@ end divfreq;
 
 architecture divfreq_arch of divfreq is
 
-signal count: 	natural range 0 to 416667:=0;
+signal count: 	natural:=0; -- range 0 to 3090
 signal ot: 		std_logic:='0';
 
 begin
@@ -40,7 +40,8 @@ begin
 	begin
 		if (clk'event and clk='1') then
 			count<=count+1;
-			if (count=125) then
+			
+			if (count=416667) then
 				count<=0;
 				ot<=not ot;
 			end if;
