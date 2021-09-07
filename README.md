@@ -11,12 +11,22 @@ All-Digital Phase-Locked Loops (ADPLL) code in High Speed Integrated Circuit Har
 ## Work
 Work produced in the course of Advanced Microprocessor Techniques (DSP and FPGA) of the UFC PPGEE, under the supervision of PhD professor Paulo Peixoto Praça.
 
+## Presentation
+- [Keynote Format - portuguese Version](trabalho-pll.key)
+- [Powerpoint Format - portuguese version](trabalho-pll.ppt)
+
+## Presentation Video
+
 ## Related Works
 
 
 ## Tools
-Altera Quartus Prime Lite Edition Version 15.1.0 (Copyright (C) 1991-2015 Altera Corporation)
-Model*Sim* Altera Starter Edition 10.4b (opyright (C) 1991-2015 Mentor Graphics Corporation)
+- Altera Quartus Prime Lite Edition Version 15.1.0 (Copyright (C) 1991-2015 Altera Corporation)
+- Model*Sim* Altera Starter Edition 10.4b (opyright (C) 1991-2015 Mentor Graphics Corporation)
+
+## Operating System used for tests
+
+Microsoft Windows 11
 
 ## Lisence
 [GNU Public Lisence version v3.0](LISENCE).
