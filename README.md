@@ -22,7 +22,7 @@ Work produced in the course of Advanced Microprocessor Techniques (DSP and FPGA)
 -- sine_wave_gen.vhd: sine wave generator vhdl file
 -- pfd.vhd: phase frequency detector vhdl  file
 -- k_counter.vhd:  loop filter (K-Counter) vhdl file
--- dco.vhd: Digital controlled  oscillator vhdl  file
+-- dco.vhd: Digital controlled  oscillator vhdl  file **(not completed)**
 
 ## Presentation Video
 
