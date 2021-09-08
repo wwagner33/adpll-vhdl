@@ -1,25 +1,33 @@
+-- ********************************************************
+-- File: tff.vhd
+-- Description: Toogle Flip Flop
+--		Code based in JK Flip Flop Toggle 
+-- 	(https://www.electronics-tutorials.ws/counter/count_1.html)
+-- Inputs: t,clock
+-- Outputs: q(Out of D Flip Flop, 
+-- Authors: Wellington, Paulo e Ricardo
+-- Date: 16/06/2021
+-- Status: No tested
+-- ********************************************************
+
+
 library ieee;
 use ieee.std_logic_1164.all;
 
 entity t_ff is
-  port (clk,t,en,rst : in std_logic;
-        q: out std_logic;
-        qnot : out std_logic);
- end t_ff;
-architecture tff_arch of t_ff is  
- signal op: std_logic;                           
-  begin                                              
-   process(clk, rst) is
-    begin
-      if(en='0') then op<='Z';
-      elsif (en='1' and rst='1') then
-          op <= '0';
-      elsif (clk'event and clk='1') then
-          if((t='1') and (en='1')) then op <= not op;
-          else op <= op;
-          end if;
-     end if;
-   end process;
-   q <= op;
-   qnot <= not op;                               
- end tff_arch;
+	port(t  : in std_logic;
+	    q : buffer std_logic
+	    );
+end t_ff; 
+
+architecture t_ff_arch of t_ff is
+	signal j,k :std_logic:='1';
+	begin 
+
+	toggle:process (t)
+		begin
+			if (rising_edge(t)) then 
+				q <= (j  and not q ) or (not k and q) ;
+			end if ;
+		end process toggle;
+end t_ff_arch;

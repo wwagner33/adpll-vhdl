@@ -14,13 +14,13 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity tff is
+entity t_ff is
 	port(t  : in std_logic;
 	    q : buffer std_logic
 	    );
 end tff; 
 
-architecture tff_arch of tff is
+architecture t_ff_arch of t_ff is
 	signal j,k :std_logic:='1';
 	begin 
 

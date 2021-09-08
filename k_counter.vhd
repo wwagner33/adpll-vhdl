@@ -16,9 +16,9 @@ use ieee.numeric_std.all;
 
 entity k_counter is 
 	port (
---		in_up:  		in  std_logic;
---		in_down:  	in  std_logic;
-		downup:		in  std_logic;
+		in_up:  		in  std_logic;
+		in_down:  	in  std_logic;
+--		downup:		in  std_logic;
 		kclock:  in  std_logic;
 		carry:  	out  std_logic;
 		borrow:  out  std_logic);
@@ -28,41 +28,61 @@ architecture k_counter_arch of k_counter is
 	constant k: natural:=8;-- 16
 	signal sup,sdown,sdownup: std_logic;
 	signal kcountup,kcountdown : natural:=0;
-	signal otup,otdown: std_logic:='0';
+	signal otup,otdown: 	std_logic:='0';
 	
 begin
 	carry<=otup;
 	borrow<=otdown;
---	sup<=in_up;
---	sdown<=in_down;
-	sdownup<=downup;
+	sup<=in_up;
+	sdown<=in_down;
+--	sdownup<=downup;
 	
-	count_up: process(kclock)
-		variable msb: std_logic_vector(3 downto 0);
-	begin
-			if (sdownup='0') then -- (sdown='0' and sup='1')
-				kcountup<=kcountup+1;
-				if (kcountup>(k-1)) then
-					kcountup<=0;
-				end if;
-			end if;
-			msb:=std_logic_vector(to_unsigned(kcountup, msb'length));
-			otup<=msb(3);
-
-	end process count_up;
-
+	-- UP Counter
+	
 	count_down: process(kclock)
 		variable msb: std_logic_vector(3 downto 0);
 	begin
-			if (sdownup='1') then -- (sdown='1' and sup='0')
+		if (kclock'event AND kclock='1') then
+			if (sdown='1' and sup='0') then -- (sdownup='1')
 				kcountdown<=kcountdown+1;
 				if (kcountdown>(k-1)) then
 					kcountdown<=0;
 				end if;
 			end if;
-			msb:=std_logic_vector(to_unsigned(kcountdown, msb'length));
-			otdown<=msb(3);
+			if (kcountdown>=(k/2)) then
+				msb:=std_logic_vector(to_unsigned(kcountdown, msb'length));
+				otdown<=msb(2);			
+			end if;
+--			msb:=std_logic_vector(to_unsigned(kcountdown, msb'length));
+--			otdown<=msb(3);
+		end if;
 	end process count_down;
+	
+	
+	-- DOWN Counter
+	
+	count_up: process(kclock)
+		variable msb: std_logic_vector(3 downto 0);
+	begin
+		if (kclock'event AND kclock='1') then
+			if (sdown='0' and sup='1') then -- (sdownup='0')
+				kcountup<=kcountup+1;
+				if (kcountup>(k-1)) then
+					kcountup<=0;
+				end if;
+			end if;
+			if (kcountup>=(k/2)) then
+				msb:=std_logic_vector(to_unsigned(kcountup, msb'length));
+				otup<=msb(2);	
+			end if;
+--			msb:=std_logic_vector(to_unsigned(kcountup, msb'length));
+--			otup<=msb(3);
+		end if;
+
+
+	end process count_up;
+
+
 
 
 end k_counter_arch;
