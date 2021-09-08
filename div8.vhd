@@ -17,7 +17,7 @@ use ieee.std_logic_unsigned.all;
 entity div8 is
 	port(input  : in std_logic;
         
-	    div8_out: buffer std_logic
+	    div8_out: out std_logic
 	    );
 end div8; 
 

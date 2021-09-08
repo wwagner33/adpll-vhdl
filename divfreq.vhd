@@ -17,8 +17,6 @@
 -- Counter is 25  to 1MHz
 -- Remove Counter to 25 MHz
 
-
-
 library ieee;
 use ieee.std_logic_1164.all;
 

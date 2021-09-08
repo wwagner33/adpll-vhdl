@@ -64,12 +64,12 @@ begin
 
 	end process state_edge;
 
-	state_clcocked:process(clock)
+	state_clocked:process(clock)
 	begin
-		if (clock 'event and clock = '1') then 
+		if (clock'event and clock = '1') then 
 			present_state <= next_state; 
     		end if ; 
-	end process state_clcocked; 
+	end process state_clocked; 
 
 end  archedge;
 
