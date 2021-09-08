@@ -19,9 +19,9 @@ use ieee.std_logic_unsigned.all;
 entity dff_cont is
    port (
       flag_carr,Flag_borr,clock	: in std_logic; 
-      toggleff 						: buffer std_logic; 
+      toggleff 						: in std_logic; 
       idout 							: out  std_logic;
-      flag  							: buffer std_logic                           
+      flag  							: out std_logic                           
    ); 
 end dff_cont; 
 
@@ -35,22 +35,26 @@ architecture arch_dff_cont of dff_cont is
 	
    dff_control:process (flag_carr, flag_borr)
 		begin 
-			 if (flag_carr= '1' or flag_borr = '1') then  
-				flag  <= '0';
-			 else 
-				flag  <= '1';        
-			 end if;
+		
+			if (clock'event and clock = '1') then
+				if (flag_carr= '1' or flag_borr = '1') then  
+					flag  <= '0';
+				else 
+					flag  <= '1';        
+				end if;
+			end if;
+
 		end process  dff_control;
 
 
    -- process that changes the frequency of the IDout 
 
-   jk:process (clock)
-		begin 
-			if (clock 'event and clock = '1') then 
-				toggleff <= (  flag  and not toggleff ) or (not flag and toggleff);
-			 end if ; 
-		end process jk;
+--   jk:process (clock)
+--		begin 
+--			if (clock'event and clock = '1') then 
+--				toggleff <= not toggleff; -- (  flag  and not toggleff ) or (not flag and toggleff);
+--			 end if ; 
+--		end process jk;
 
 
    idout <= not clock and not toggleff; 

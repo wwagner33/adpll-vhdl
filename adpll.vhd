@@ -27,7 +27,9 @@ entity adpll IS
 --		kcounter_carr_out:	out	std_logic;  --pino para proposito de teste
 --		kcounter_borr_out:	out	std_logic;  --pino para proposito de teste
 		
-		pll_out 		:  out  	std_logic
+		adpll_out	:  out  	std_logic;
+		adpll_sine_out:	out	natural range 0 to 255
+		
 	);
 end adpll;
 
@@ -118,7 +120,7 @@ begin
 	pfd_inst : pfd
 	port map(
 			a 					=> 	test_in_divfreq, -- link_swg_pfd,
-			b 					=> 	b_in,-- link_dco_out,
+			b 					=> 	link_dco_out, -- b_in,
 			out_up			=> 	link_up_kcounter,
 			out_down 		=> 	link_down_kcounter
 			);
@@ -141,19 +143,29 @@ begin
 			borrow			=>		link_borr_dco
 			);
 
-	test_kcounter_carr_out<=link_carr_dco;
-	test_kcounter_borr_out<=link_borr_dco;
+--	test_kcounter_carr_out<=link_carr_dco;
+--	test_kcounter_borr_out<=link_borr_dco;
 	
 --	-- Controlled Oscillator
 		
 	dco_inst	:dco
 	port map(
-			carry 		=> 	test_kcounter_carr_out,-- link_carr_dco,
-			borrow		=>		test_kcounter_borr_out, --link_borr_dco,
+			carry 		=> 	link_carr_dco,
+			borrow		=>		link_borr_dco,
 			clock 	=>		idclock,
 			dco_out	=>		link_dco_out
 		);
 
-	pll_out <= link_dco_out;
+	adpll_out <= link_dco_out;
+	
+	
+--		-- Sine Wave Generator
+--	
+--	sine_wave_gen_inst2: sine_wave_gen
+--	port map(
+--		clk 				=> link_dco_out,
+--    dataout 			=>	adpll_sine_out,
+--			
+--	);
 
 end adpll_arch;
