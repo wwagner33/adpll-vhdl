@@ -15,6 +15,15 @@ Work produced in the course of Advanced Microprocessor Techniques (DSP and FPGA)
 - [Keynote Format - portuguese Version](trabalho-pll.key)
 - [Powerpoint Format - portuguese version](trabalho-pll.ppt)
 
+## Files
+
+-- adpll.vhd: main project file with all project componets
+-- divfreq.vhd: frequency divider file vhdl 
+-- sine_wave_gen.vhd: sine wave generator vhdl file
+-- pfd.vhd: phase frequency detector vhdl  file
+-- k_counter.vhd:  loop filter (K-Counter) vhdl file
+-- dco.vhd: Digital controlled  oscillator vhdl  file
+
 ## Presentation Video
 
 ## References
