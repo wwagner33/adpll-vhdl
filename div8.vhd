@@ -24,22 +24,22 @@ end div8;
 -- instatantiate 2 toggle flip flop 
 
 architecture div8_arch of div8 is 
-	component tff is 
+	component t_ff is 
 		port(	t  : in std_logic;
 			q : buffer std_logic
 	    );
 	end component;
 	signal sq2, sq4,sq8 : std_logic;
 begin 
-	div2:tff port map (
+	div2:t_ff port map (
 			t => input,
         q => sq2
        );
-    div4:tff port map (
+    div4:t_ff port map (
         t => sq2,
         q => sq4
         );
-	 div8:tff port map (
+	 div8:t_ff port map (
          t => sq4,
          q => div8_out
         );
