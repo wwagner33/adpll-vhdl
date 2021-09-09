@@ -93,6 +93,8 @@ architecture adpll_arch of adpll is
 
 begin 
 
+	adpll_out <= link_dco_out;
+
 	-- Frequency divider to create smallest frequency from 50MHz frequency signal(ex.; 200KHz,60Hz,120Hz)
 
 	divfreq_inst : divfreq
@@ -120,7 +122,7 @@ begin
 	pfd_inst : pfd
 	port map(
 			a 					=> 	test_in_divfreq, -- link_swg_pfd,
-			b 					=> 	link_dco_out, -- b_in,
+			b 					=> 	link_dco_out, -- Saida do DCO entra em PFD -- b_in,
 			out_up			=> 	link_up_kcounter,
 			out_down 		=> 	link_down_kcounter
 			);
@@ -156,7 +158,7 @@ begin
 			dco_out	=>		link_dco_out
 		);
 
-	adpll_out <= link_dco_out;
+
 	
 	
 --		-- Sine Wave Generator
