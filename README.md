@@ -9,7 +9,7 @@ All-Digital Phase-Locked Loops (ADPLL) code in High Speed Integrated Circuit Har
 - **Rodrigo C. Ciarlini** - Master student of the Post-Graduate Program in Electrical Engineering (PPGEE) of the Federal University of Ceará (UFC)
 
 ## Work
-Work produced in the course of Advanced Microprocessor Techniques (DSP and FPGA) of the UFC PPGEE, under the supervision of PhD professor Paulo Peixoto Praça.
+Work produced in the course of Advanced Microprocessor Techniques (DSP and FPGA) of the UFC PPGEE, under the supervision of Prof. PhD Paulo Peixoto Praça.
 
 ## Presentation
 - [Keynote Format - portuguese Version](trabalho-pll.key)
@@ -34,6 +34,10 @@ Work produced in the course of Advanced Microprocessor Techniques (DSP and FPGA)
 5. Henry Young, Alex Tong, Ahmed Allam. Projeto de um DPLL. Disciplina High Level Digital ASIC Design Using CAD (EE552), Departamento de Engenharia Elétrica e de Computadores,  Universidade de Alberta, Canadá, 1999. Acessado em 10/05/2021.
 6. P. E. Allen. Lecture 080 - All Digital Phase Lock Loops (ADPLL). Material da disciplina Frequency Sythesizers, The School of Electrical and Computer Engineering of Georgia Institute of Technology,2003. Acessado em: 02/07/2021.
 7. M. Kumar, K. Lata. FPGA Implementation of ADPLL with Ripple Reduction Techniques. International Journal of VLSI design & Communication Systems (VLSICS) Vol.3, No.2, 2012 .
+8. ZipCPU. Building a Numerically Controlled Oscillator. URL: [https://zipcpu.com/dsp/2017/12/09/nco.html](https://zipcpu.com/dsp/2017/12/09/nco.html). 2017.
+9. SurfVHDL. How to implement NCO in VHDL. URL: [https://surf-vhdl.com/how-to-implement-nco-vhdl/](https://surf-vhdl.com/how-to-implement-nco-vhdl/). 2017
+10. R.E. Best, Phase-Locked Loops – Design, Simulation, and Applications, 4thedition, McGraw-Hill, 1999.
+11. Basab B Purkayastha, Kandarpa Kumar Sarma. A Digital Phase Locked Loop based Signal and Symbol Recovery System for Wireless Channel. 1stPublisher: Springer India, New DelhiISBN: 978-81-322-2040-4, DOI:10.1007/978-81-322-2041-1, URL: [link](https://www.researchgate.net/publication/271520378_A_Digital_Phase_Locked_Loop_based_Signal_and_Symbol_Recovery_System_for_Wireless_Channel), 2015. 
 
 ## Tools
 - Altera Quartus Prime Lite Edition Version 15.1.0 (Copyright (C) 1991-2015 Altera Corporation)
