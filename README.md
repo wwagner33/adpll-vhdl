@@ -1,6 +1,6 @@
 
 #
-# <span style="color:blue">Warning: **Work in processing!**</span>
+# <span style="color:blue">WARNING: *Work in processing!</span>
 #
 
 # All-Digital Phase-Locked Loops (ADPLL)
