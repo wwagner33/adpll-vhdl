@@ -13,8 +13,8 @@ All-Digital Phase-Locked Loops (ADPLL) code in High Speed Integrated Circuit Har
 
 - **Rodrigo C. Ciarlini** - Master student of the Post-Graduate Program in Electrical Engineering (PPGEE) of the Federal University of Ceará (UFC)
 
-## Work
-Work produced in the course of Advanced Microprocessor Techniques (DSP and FPGA) of the UFC PPGEE, under the supervision of Prof. PhD Paulo Peixoto Praça.
+## About this work
+Code produced in the course of Advanced Microprocessor Techniques (DSP and FPGA) of the UFC PPGEE, under the supervision of Prof. PhD Paulo Peixoto Praça.
 
 ## Presentation
 - [Keynote Format - portuguese Version](trabalho-pll.key)
@@ -29,7 +29,9 @@ Work produced in the course of Advanced Microprocessor Techniques (DSP and FPGA)
 - k_counter.vhd:  loop filter (K-Counter) vhdl file
 - dco.vhd: Digital controlled  oscillator vhdl  file **(not completed)**
 
-## Presentation Video
+## Conclusions
+
+## Future works
 
 ## References
 1. Behzad Razavi, "Design of Monolithic PhaseLocked Loops and Clock Recovery CircuitsA Tutorial," in Monolithic Phase-Locked Loops and Clock Recovery Circuits: Theory and Design , IEEE, 1996, pp.1-39, doi: 10.1109/9780470545331.ch1.
