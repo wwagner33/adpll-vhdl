@@ -17,6 +17,7 @@ All-Digital Phase-Locked Loops (ADPLL) code in High Speed Integrated Circuit Har
 Code produced in the course of Advanced Microprocessor Techniques (DSP and FPGA) of the UFC PPGEE, under the supervision of Prof. PhD Paulo Peixoto Praça.
 
 ## Presentation
+- [PDF Format - portuguese Version](trabalho-pll.pdf)
 - [Keynote Format - portuguese Version](trabalho-pll.key)
 - [Powerpoint Format - portuguese version](trabalho-pll.ppt)
 
