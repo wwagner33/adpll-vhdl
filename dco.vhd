@@ -6,7 +6,7 @@
 -- Output: idout.
 -- Author: Wellington W. F. Sarmento, Paulo de T. C. Pequeno e Rodrigo Ciarlini
 -- Date: 28/06/2021
--- State: not tested
+-- State: NOT VALIDATED!!!!
 -- ****************************************************
 library ieee;
 use ieee.std_logic_1164.all; 
@@ -22,7 +22,8 @@ end dco;
 architecture dco_arch of dco is 
  
 	constant n: natural:=8;
-	signal soutincr,soutdecr,sidoutincr, sidoutdecr,sidout,sfcout: std_logic:='0';
+	signal soutincr,soutdecr,sidoutincr, sidoutdecr,sidout: std_logic:='0';
+	signal ot: 		std_logic:='0';
 	signal sborrow,scarry: std_logic:='0';
 	
 	signal countincr,countfc : natural:=0;
@@ -32,87 +33,98 @@ begin
 
 sborrow<=borrow;
 scarry<=carry;
+dco_out<=ot OR sidout;
+sidout<=sidoutincr XOR sidoutdecr;
 
-incr: process(sborrow)
+
+incr: process(clock,sborrow)
 begin
+	if (clock'event AND clock='1') then	
 	
 		if (sborrow='1') then
-			soutincr<= '1';
+			sidoutincr<= '1';
 		else
-			soutincr<= '0';			
+			sidoutincr<='0';
 		end if;
+	end if;
 
-
-		
+									
 end process incr;
 
+
 	
-decr: process(scarry)
+decr: process(clock,scarry)
 begin
-	
-		if (scarry='1') then
-			soutdecr<='1';
-		else
-			soutdecr<='0';
+
+		if (clock'event AND clock='1') then	
+			if (scarry='1') then
+				sidoutdecr<= '0';
+			else
+				sidoutdecr<='1';
+			end if;
 		end if;
-		
+			
+
+--	if (clock'event AND clock='1') then		
+--		if (scarry='1') then
+--		sidout<='0';
+--		end if;
+--	end if;	
 end process decr;
 
 
 
-counterincr: process(clock)
-
-begin
-	if (clock'event AND clock='1') then
-	
-		if (soutincr='1') then
-			countincr<=countincr+1;
-			if (countincr>(n-1)) then
-				countincr<=0;
-				sidoutincr<='0';
-			else 
-				sidoutincr<=not sidoutincr;			
-			end if;	
-		end if;			
-	
-	end if;
-end process counterincr;
-
-
-counterdecr: process(clock)
-
-begin
-	if (clock'event AND clock='1') then
-		if (soutdecr='1') then
-			countdecr<=countdecr-1;
-			if (countdecr=0) then
-				countdecr<=8;
-				sidoutdecr<='0';
-			else 
-				sidoutdecr<=not sidoutdecr;			
-			end if;				
-		end if;
-	
-	
-	end if;
-end process counterdecr;
-
-sidout<=sidoutincr XOR sidoutdecr;
-
-
 freqcenter: process(clock)
-	begin
-		if (clock'event and clock='1') then
-			countfc<=countfc+1;
-			
-			if (countfc=8000) then
-				countfc<=0;
-				sfcout<=not sfcout;
-			end if;
+begin
+	if (clock'event AND clock='1') then
+		countfc<=countfc+1;
+		
+		if (countfc=7) then
+			countfc<=0;
+			ot<=not ot;
 		end if;
-	end process freqcenter;
+	end if;
+end process freqcenter;
 
 
-dco_out<=sfcout;
+--counterincr: process(clock)
+--
+--begin
+--	if (clock'event AND clock='1') then
+--	
+--		if (soutincr='1') then
+--			countincr<=countincr+1;
+--			if (countincr>(n-1)) then
+--				countincr<=0;
+--				sidoutincr<='0';
+--			else 
+--				sidoutincr<=not sidoutincr;			
+--			end if;	
+--		end if;			
+--	
+--	end if;
+--end process counterincr;
+--
+--
+--counterdecr: process(clock)
+--
+--begin
+--	if (clock'event AND clock='1') then
+--		if (soutdecr='1') then
+--			countdecr<=countdecr-1;
+--			if (countdecr=0) then
+--				countdecr<=8;
+--				sidoutdecr<='0';
+--			else 
+--				sidoutdecr<=not sidoutdecr;			
+--			end if;				
+--		end if;
+--	
+--	
+--	end if;
+--end process counterdecr;
+
+
+
 
 end  dco_arch;
