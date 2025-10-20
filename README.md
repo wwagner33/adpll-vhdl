@@ -51,6 +51,8 @@ Code produced in the course of Advanced Microprocessor Techniques (DSP and FPGA)
 - Altera Quartus Prime Lite Edition Version 15.1.0 (Copyright (C) 1991-2015 Altera Corporation)
 - Model*Sim* Altera Starter Edition 10.4b (opyright (C) 1991-2015 Mentor Graphics Corporation)
 
+<img src="https://media.valenciaplaza.com/public/Image/2016/1/b3184134_blade_runner_16_forCrop.jpg"/>
+
 ## Operating System used for tests
 
 Microsoft Windows 11
